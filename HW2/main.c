@@ -2,6 +2,6 @@
 
 int main(int argc, char **argv)
 {
-    printf("This is my eighty sixth git located project");
+    printf("   *\n  ***\n *****\n*******\n HHOHH\n ZZZZZ");
     return 0;
 }
