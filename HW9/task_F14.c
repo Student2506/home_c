@@ -7,13 +7,13 @@ int sum_between_ab(int from, int to, int size, int a[]);
 
 int main(int argc, char **argv)
 {
-    int *numbers = (int*) malloc(LIMIT * sizeof(int));
-    for(int i = 0; i < LIMIT; i++)
+    int *numbers = (int *)malloc(LIMIT * sizeof(int));
+    for (int i = 0; i < LIMIT; i++)
     {
         scanf("%d", &numbers[i]);
     }
     change_max_min(LIMIT, numbers);
-    for(int i = 0; i < LIMIT; i++)
+    for (int i = 0; i < LIMIT; i++)
     {
         printf("%d ", numbers[i]);
     }
@@ -30,9 +30,9 @@ int sum_between_ab(int from, int to, int size, int a[])
         to = from ^ to;
         from ^= to;
     }
-    for(int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
-        if(a[i] >= from && a[i] <= to)
+        if (a[i] >= from && a[i] <= to)
         {
             counter += a[i];
         }

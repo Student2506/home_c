@@ -20,9 +20,10 @@ int main(int argc, char **argv)
     }
     count_total--;
     int count_even = 0;
-    for(int i = 0; i < count_total; i++)
+    for (int i = 0; i < count_total; i++)
     {
-        if ((num[i] % 2) == 0) count_even++;
+        if ((num[i] % 2) == 0)
+            count_even++;
     }
     printf("%d", count_even);
     return 0;

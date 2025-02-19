@@ -13,8 +13,10 @@ int main(int argc, char **argv)
 
 int recurs_power(int n, int p)
 {
-    if (p == 0) return 1;
-    if (p == 1) return n;
-    n *=  recurs_power(n, p-1);
+    if (p == 0)
+        return 1;
+    if (p == 1)
+        return n;
+    n *= recurs_power(n, p - 1);
     return n;
 }

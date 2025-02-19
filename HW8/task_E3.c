@@ -5,24 +5,26 @@
 
 int main(int argc, char **argv)
 {
-    int numbers[LIMIT] = { -1 };
+    int numbers[LIMIT] = {-1};
     int minimum = INT_MAX;
     int maximum = INT_MIN;
     int max_idx = -1, min_idx = -1;
 
-    for(int i = 0; i < LIMIT; i++)
+    for (int i = 0; i < LIMIT; i++)
     {
         scanf("%d", &numbers[i]);
     }
-    for(int i = 0; i < LIMIT; i++)
+    for (int i = 0; i < LIMIT; i++)
     {
-        if(minimum > numbers[i]) {
+        if (minimum > numbers[i])
+        {
             minimum = numbers[i];
-            min_idx = i+1;
+            min_idx = i + 1;
         }
-        if(maximum < numbers[i]) {
+        if (maximum < numbers[i])
+        {
             maximum = numbers[i];
-            max_idx = i+1;
+            max_idx = i + 1;
         }
     }
 

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void reverse_string(char* current);
+void reverse_string(char *current);
 
 int main(int argc, char **argv)
 {
@@ -10,9 +10,10 @@ int main(int argc, char **argv)
     return 0;
 }
 
-void reverse_string(char* current)
+void reverse_string(char *current)
 {
-    if (*current == '.') {
+    if (*current == '.')
+    {
         return;
     }
     reverse_string(current + 1);

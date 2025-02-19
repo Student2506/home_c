@@ -12,9 +12,9 @@ int main(int argc, char **argv)
     fscanf(fp, "%[^\n]%*c", word);
     int length = strlen(word);
     int i = 0;
-    while(i < length)
+    while (i < length)
     {
-        if(word[i] == 'C' && (i+2) < length && word[i+1] == 'a' && word[i+2] == 'o')
+        if (word[i] == 'C' && (i + 2) < length && word[i + 1] == 'a' && word[i + 2] == 'o')
         {
             fprintf(fp_out, "Ling");
             i += 3;

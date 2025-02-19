@@ -13,6 +13,7 @@ int main(int argc, char **argv)
 
 int module(int number)
 {
-    if (number >= 0) return number;
+    if (number >= 0)
+        return number;
     return -number;
 }

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <limits.h>
 
-
 float cosinus(int);
 int factorial(int);
 float power(float, int);
@@ -55,7 +54,8 @@ int factorial(int input)
 float power(float n, int p)
 {
     float counter = 1.;
-    for(int i = 0; i < p; i++) {
+    for (int i = 0; i < p; i++)
+    {
         counter *= n;
     }
     return counter;
@@ -63,7 +63,7 @@ float power(float n, int p)
 
 float abs_value(float number)
 {
-    if (number < 0.) return -number;
+    if (number < 0.)
+        return -number;
     return number;
 }
-

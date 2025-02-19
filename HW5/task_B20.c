@@ -4,17 +4,18 @@
 
 int is_prime(int x);
 
-
 int main(int argc, char **argv)
 {
     int first;
 
     scanf("%d", &first);
-    if (first == 1) {
+    if (first == 1)
+    {
         printf("NO");
         return 0;
     }
-    if (is_prime(first) == 0) {
+    if (is_prime(first) == 0)
+    {
         printf("NO");
     }
     else
@@ -28,7 +29,7 @@ int main(int argc, char **argv)
 int is_prime(int x)
 {
     int i = 2;
-    while(i * i <= x)
+    while (i * i <= x)
     {
         if (x % i == 0)
         {

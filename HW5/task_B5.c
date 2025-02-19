@@ -7,9 +7,9 @@ int main(int argc, char **argv)
     scanf("%s", &num);
     int i = 0;
     int accum = 0;
-    while(num[i] != '\0')
+    while (num[i] != '\0')
     {
-        accum += (int) num[i] - '0';
+        accum += (int)num[i] - '0';
         i++;
     }
     printf("%d", accum);

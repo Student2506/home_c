@@ -12,7 +12,8 @@ int main(int argc, char **argv)
 
 void print(unsigned long long current)
 {
-    if (current == 0) return;
+    if (current == 0)
+        return;
     printf("%d ", current);
-    print(current-1);
+    print(current - 1);
 }

@@ -18,9 +18,10 @@ int main(int argc, char **argv)
 int find_max_array(int size, int a[])
 {
     int max = -1000;
-    for(int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
-        if(max < a[i]) max = a[i];
+        if (max < a[i])
+            max = a[i];
     }
     return max;
 }

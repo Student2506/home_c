@@ -8,7 +8,7 @@ int main(int argc, char **argv)
     scanf("%s", &num);
     int length = strlen(num);
 
-    for (int i = length-1; i>=0; i--)
+    for (int i = length - 1; i >= 0; i--)
     {
         printf("%d", num[i] - '0');
     }

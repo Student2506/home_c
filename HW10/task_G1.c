@@ -11,8 +11,9 @@ int main(int argc, char **argv)
     int accum = 0;
     char word[LIMIT];
     fgets(word, LIMIT, fp);
-    if(word[strlen(word)-1] == '\n') word[strlen(word)-1] = '\0';
-    for(int i = 0; i < 2; i++)
+    if (word[strlen(word) - 1] == '\n')
+        word[strlen(word) - 1] = '\0';
+    for (int i = 0; i < 2; i++)
     {
         fprintf(fp_out, "%s, ", word);
     }

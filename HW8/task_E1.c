@@ -4,9 +4,9 @@
 
 int main(int argc, char **argv)
 {
-    int numbers[LIMIT] = { -1 };
+    int numbers[LIMIT] = {-1};
     float accum = 0.;
-    for(int i = 0; i < LIMIT; i++)
+    for (int i = 0; i < LIMIT; i++)
     {
         scanf("%d", &numbers[i]);
         accum += numbers[i];

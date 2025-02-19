@@ -11,20 +11,22 @@ int main(int argc, char **argv)
     char word[LIMIT];
     fgets(word, LIMIT, fp);
     int length = strlen(word);
-    if(word[length-1] == '\n') length--;
+    if (word[length - 1] == '\n')
+        length--;
     int i = 0;
     char is_space = 0;
-    while(i < length && word[i] == ' ')
+    while (i < length && word[i] == ' ')
     {
         i++;
     }
-    while(i < length)
+    while (i < length)
     {
-        while(word[i]==' ') {
+        while (word[i] == ' ')
+        {
             i++;
             is_space = 1;
         }
-        if(is_space)
+        if (is_space)
         {
             is_space = 0;
             fprintf(fp_out, " %c", word[i]);

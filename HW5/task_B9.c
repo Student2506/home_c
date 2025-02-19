@@ -6,9 +6,10 @@ int main(int argc, char **argv)
 
     scanf("%s", &num);
     int i = 0;
-    while(num[i] != '\0')
+    while (num[i] != '\0')
     {
-        if ((num[i] - '0') % 2 == 1) {
+        if ((num[i] - '0') % 2 == 1)
+        {
             printf("NO");
             return 0;
         }

@@ -11,9 +11,10 @@ int main(int argc, char **argv)
     char word[LIMIT];
     fscanf(fp, "%[^\n]%*c", word);
     int length = strlen(word);
-    for(int i = 0; i < length-1; i++)
+    for (int i = 0; i < length - 1; i++)
     {
-        if(word[i] == word[length-1]) fprintf(fp_out, "%d ", i);
+        if (word[i] == word[length - 1])
+            fprintf(fp_out, "%d ", i);
     }
     fclose(fp_out);
     fclose(fp);

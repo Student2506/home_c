@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void converter(char*);
+void converter(char *);
 
 int main(int argc, char **argv)
 {

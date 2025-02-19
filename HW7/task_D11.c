@@ -12,7 +12,8 @@ int main(int argc, char **argv)
 
 int bin_converter(int number)
 {
-    if (number == 0 || number == 1) {
+    if (number == 0 || number == 1)
+    {
         // printf("%d", number);
         return number;
     }

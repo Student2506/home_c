@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void print(char* current);
+void print(char *current);
 
 int main(int argc, char **argv)
 {
@@ -10,9 +10,10 @@ int main(int argc, char **argv)
     return 0;
 }
 
-void print(char* current)
+void print(char *current)
 {
-    if (*current == '\n') {
+    if (*current == '\n')
+    {
         return;
     }
     printf("%c ", current[0]);

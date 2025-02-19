@@ -11,8 +11,10 @@ int main(int argc, char **argv)
     int i = 0;
     while (num[i] != '\0')
     {
-        if (minimum > num[i]) minimum = num[i];
-        if (maximum < num[i]) maximum = num[i];
+        if (minimum > num[i])
+            minimum = num[i];
+        if (maximum < num[i])
+            maximum = num[i];
         i++;
     }
     printf("%d %d", minimum - '0', maximum - '0');

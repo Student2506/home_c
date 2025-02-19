@@ -11,16 +11,20 @@ int main(int argc, char **argv)
     char word[LIMIT];
     fgets(word, LIMIT, fp);
     int length = strlen(word);
-    if(word[length-1] == '\n') length--;
+    if (word[length - 1] == '\n')
+        length--;
     int first, second;
     int i = 0;
-    while(i < length)
+    while (i < length)
     {
-        while(word[i]==' ') i++;
+        while (word[i] == ' ')
+            i++;
         first = i;
         i++;
-        if(i == length) break;
-        while(word[i]==' ') i++;
+        if (i == length)
+            break;
+        while (word[i] == ' ')
+            i++;
         second = i;
         word[first] ^= word[second];
         word[second] = word[first] ^ word[second];
@@ -28,8 +32,6 @@ int main(int argc, char **argv)
         i++;
     }
     fprintf(fp_out, "%s", word);
-    // i++;
-    // if(length % 2 == 1) fprintf(fp_out, "%c", word[i]);
     fclose(fp_out);
     fclose(fp);
     return 0;

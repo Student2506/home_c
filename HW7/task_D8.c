@@ -13,14 +13,18 @@ int main(int argc, char **argv)
 
 void print(int left, int right)
 {
-    if (left == right) {
+    if (left == right)
+    {
         printf("%d ", left);
         return;
     }
     printf("%d ", left);
-    if (left > right) {
-        print(left-1, right);
-    } else {
-        print(left+1, right);
+    if (left > right)
+    {
+        print(left - 1, right);
+    }
+    else
+    {
+        print(left + 1, right);
     }
 }

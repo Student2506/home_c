@@ -5,15 +5,16 @@
 
 int main(int argc, char **argv)
 {
-    int numbers[LIMIT] = { -1 };
+    int numbers[LIMIT] = {-1};
     int accum = 0;
-    for(int i = 0; i < LIMIT; i++)
+    for (int i = 0; i < LIMIT; i++)
     {
         scanf("%d", &numbers[i]);
     }
-    for(int i = 0; i < LIMIT; i++)
+    for (int i = 0; i < LIMIT; i++)
     {
-        if(0 < numbers[i]) {
+        if (0 < numbers[i])
+        {
             accum += numbers[i];
         }
     }

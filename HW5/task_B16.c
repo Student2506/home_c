@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-
 int main(int argc, char **argv)
 {
     int first, second;
@@ -20,8 +19,10 @@ int main(int argc, char **argv)
         }
     }
     int result;
-    if (first == 0) result = second;
-    else result = first;
+    if (first == 0)
+        result = second;
+    else
+        result = first;
     printf("%d", result);
 
     return 0;

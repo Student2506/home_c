@@ -14,7 +14,8 @@ void simple_multi(int input)
 {
     for (int i = 2; i <= input;)
     {
-        if (input % i == 0) {
+        if (input % i == 0)
+        {
             printf("%d ", i);
             input /= i;
             i = 2;

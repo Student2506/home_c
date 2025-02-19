@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 
     for (int i = low; i <= high; i++)
     {
-        accum += i*i;
+        accum += i * i;
     }
     printf("%d\n", accum);
     return 0;

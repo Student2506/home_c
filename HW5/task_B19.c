@@ -4,15 +4,17 @@
 
 int sum_of_numbers(int x);
 
-
 int main(int argc, char **argv)
 {
     int first;
 
     scanf("%d", &first);
-    if (sum_of_numbers(first) == 10) {
+    if (sum_of_numbers(first) == 10)
+    {
         printf("YES");
-    } else {
+    }
+    else
+    {
         printf("NO");
     }
 
@@ -22,7 +24,7 @@ int main(int argc, char **argv)
 int sum_of_numbers(int x)
 {
     int sum = 0;
-    while(x > 0)
+    while (x > 0)
     {
         sum += x % 10;
         x /= 10;

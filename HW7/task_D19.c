@@ -13,8 +13,10 @@ int acounter(void)
     char ch;
     int i = 0;
     scanf("%c", &ch);
-    if (ch == '.') return 0;
-    else if (ch == 'a') {
+    if (ch == '.')
+        return 0;
+    else if (ch == 'a')
+    {
         i++;
     }
     return i + acounter();

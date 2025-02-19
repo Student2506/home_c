@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 unsigned long long int progression(int number)
 {
     long long int accum = 1;
-    for(int i = 0; i < number; i++)
+    for (int i = 0; i < number; i++)
     {
         accum *= 2;
     }

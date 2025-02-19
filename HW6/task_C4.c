@@ -10,7 +10,8 @@ int main(int argc, char **argv)
     while (scanf("%d", &input) == 1 && input != 0)
     {
         int temp = summation(input);
-        if (maximum < temp) maximum = temp;
+        if (maximum < temp)
+            maximum = temp;
     }
 
     printf("%d", maximum);

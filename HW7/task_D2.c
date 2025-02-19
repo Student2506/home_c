@@ -12,7 +12,8 @@ int main(int argc, char **argv)
 
 unsigned long long sum(unsigned long long current)
 {
-    if (current == 0) return 0;
-    current = current + sum(current-1);
+    if (current == 0)
+        return 0;
+    current = current + sum(current - 1);
     return current;
 }

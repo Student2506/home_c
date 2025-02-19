@@ -7,8 +7,8 @@ int main(int argc, char **argv)
     scanf("%d %d", &low, &high);
     for (int i = low; i < high; i++)
     {
-        printf("%d ", i*i);
+        printf("%d ", i * i);
     }
-    printf("%d\n", high*high);
+    printf("%d\n", high * high);
     return 0;
 }

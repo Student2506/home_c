@@ -8,7 +8,7 @@ int main(int argc, char **argv)
     scanf("%d", &first);
     while (first != 0)
     {
-        if(module(first) % 2 == 1)
+        if (module(first) % 2 == 1)
         {
             printf("%d ", first);
         }
@@ -19,6 +19,7 @@ int main(int argc, char **argv)
 
 int module(int number)
 {
-    if (number >= 0) return number;
+    if (number >= 0)
+        return number;
     return -number;
 }

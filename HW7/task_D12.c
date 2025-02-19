@@ -12,12 +12,14 @@ int main(int argc, char **argv)
 
 void sequence(int current, int count, int limit, int print)
 {
-    if(print == limit) return;
-    if(current == count) {
-        sequence(current+1, 0, limit, print);
+    if (print == limit)
+        return;
+    if (current == count)
+    {
+        sequence(current + 1, 0, limit, print);
         return;
     }
     printf("%d ", current);
     print++;
-    sequence(current, count+1, limit, print);
+    sequence(current, count + 1, limit, print);
 }

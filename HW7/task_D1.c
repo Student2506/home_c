@@ -13,6 +13,7 @@ int main(int argc, char **argv)
 void print_next(int current, int maximum)
 {
     printf("%d ", current++);
-    if (current > maximum) return;
+    if (current > maximum)
+        return;
     print_next(current, maximum);
 }

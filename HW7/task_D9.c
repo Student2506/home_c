@@ -12,6 +12,7 @@ int main(int argc, char **argv)
 
 int digits_sum(int number)
 {
-    if(number < 10) return number;
+    if (number < 10)
+        return number;
     return number % 10 + digits_sum(number / 10);
 }

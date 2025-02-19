@@ -8,12 +8,12 @@ int main(int argc, char **argv)
     scanf("%s", &num);
     int i = 0;
     int result = 0;
-    while(num[i] != '\0')
+    while (num[i] != '\0')
     {
         numbers[num[i] - '0'] += 1;
         i++;
     }
-    for (int i=0; i<10; i++)
+    for (int i = 0; i < 10; i++)
     {
         if (numbers[i] > 1)
         {

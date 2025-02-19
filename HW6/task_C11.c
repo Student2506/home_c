@@ -23,6 +23,8 @@ int nod(int first, int second)
             second %= first;
         }
     }
-    if (first == 0) return second;
-    else return first;
+    if (first == 0)
+        return second;
+    else
+        return first;
 }

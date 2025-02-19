@@ -9,8 +9,8 @@ void sort_array(int size, int a[]);
 
 int main(int argc, char **argv)
 {
-    int *numbers = (int*) malloc(INPUT * sizeof(int));
-    for(int i = 0; i < INPUT; i++)
+    int *numbers = (int *)malloc(INPUT * sizeof(int));
+    for (int i = 0; i < INPUT; i++)
     {
         scanf("%d", &numbers[i]);
     }
@@ -21,12 +21,11 @@ int main(int argc, char **argv)
     }
     free(numbers);
     return 0;
-
 }
 
 void sort_array(int size, int a[])
 {
-    for(int i = 1; i < size; i++)
+    for (int i = 1; i < size; i++)
     {
         int item_to_insert = a[i];
         int j = i;

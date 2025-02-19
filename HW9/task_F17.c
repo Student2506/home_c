@@ -8,17 +8,16 @@ int main(int argc, char **argv)
 {
     char col;
     int matrix[ROW][COL];
-    for(int i = 0; i < ROW; i++)
+    for (int i = 0; i < ROW; i++)
     {
-        for(int j = 0; j < COL; j++)
-        scanf("%d", &matrix[i][j]);
+        for (int j = 0; j < COL; j++)
+            scanf("%d", &matrix[i][j]);
     }
     int accum = 0;
-    for(int i = 0; i < ROW; i++)
+    for (int i = 0; i < ROW; i++)
     {
         accum += matrix[i][i];
     }
     printf("%d", accum);
     return 0;
 }
-

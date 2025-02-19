@@ -15,31 +15,31 @@ int main(int argc, char **argv)
 
     // printf("%d", strlen(str));
     int length = strlen(str) / 2 + 1;
-    int* arr = (int *) malloc(length * sizeof(int));
-    int* arr2 = (int *) malloc(length * sizeof(int));
+    int *arr = (int *)malloc(length * sizeof(int));
+    int *arr2 = (int *)malloc(length * sizeof(int));
     int j = 0;
-    for(int i = 0; i < length; i++)
+    for (int i = 0; i < length; i++)
     {
-        if(str[i] == '1') {
+        if (str[i] == '1')
+        {
             arr[j] = 1;
             j++;
         }
-        if(str[i] == '0') {
+        if (str[i] == '0')
+        {
             arr[j] = 0;
             j++;
         }
     }
     int n = compression(arr, arr2, length);
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         printf("%d ", arr2[i]);
     }
     free(arr);
     free(arr2);
     return 0;
-
 }
-
 
 int compression(int a[], int b[], int N)
 {
@@ -47,9 +47,9 @@ int compression(int a[], int b[], int N)
     int b_idx = 0;
     int accum = 0;
 
-    for(int i=0; i < N; i++)
+    for (int i = 0; i < N; i++)
     {
-        if(ch == a[i])
+        if (ch == a[i])
         {
             accum++;
         }
@@ -62,5 +62,5 @@ int compression(int a[], int b[], int N)
         }
     }
     b[b_idx] = accum;
-    return b_idx+1;
+    return b_idx + 1;
 }

@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 int summation(int number)
 {
     int accum = 0;
-    for(int i = 1; i <= number; i++)
+    for (int i = 1; i <= number; i++)
     {
         accum += i;
     }

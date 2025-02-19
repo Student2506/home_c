@@ -10,8 +10,10 @@ int main(int argc, char **argv)
     int odd = 0, even = 0;
     while (num[i] != '\0')
     {
-        if ((num[i] - '0') % 2 == 0) even++;
-        else odd++;
+        if ((num[i] - '0') % 2 == 0)
+            even++;
+        else
+            odd++;
         i++;
     }
     printf("%d %d", even, odd);

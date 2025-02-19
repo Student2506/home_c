@@ -43,7 +43,8 @@ float cosinus(float number)
 
 float abs_value(float number)
 {
-    if (number < 0.) return -number;
+    if (number < 0.)
+        return -number;
     return number;
 }
 
@@ -59,9 +60,9 @@ int factorial(int input)
 float power(float n, int p)
 {
     float counter = 1.;
-    for(int i = 0; i < p; i++) {
+    for (int i = 0; i < p; i++)
+    {
         counter *= n;
     }
     return counter;
 }
-

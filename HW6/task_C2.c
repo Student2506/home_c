@@ -14,7 +14,8 @@ int main(int argc, char **argv)
 int power(int n, int p)
 {
     int counter = 1;
-    for(int i = 0; i < p; i++) {
+    for (int i = 0; i < p; i++)
+    {
         counter *= n;
     }
     return counter;

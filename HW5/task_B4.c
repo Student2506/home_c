@@ -6,9 +6,12 @@ int main(int argc, char **argv)
 
     scanf("%d", &num);
 
-    if (num < 100 || num > 999) {
+    if (num < 100 || num > 999)
+    {
         printf("NO");
-    } else {
+    }
+    else
+    {
         printf("YES");
     }
     return 0;

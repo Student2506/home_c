@@ -8,7 +8,7 @@ int main(int argc, char **argv)
     int i = 1;
     int result = 0;
     int previous = num[0];
-    while(num[i] != '\0')
+    while (num[i] != '\0')
     {
         if (previous == num[i])
         {
