@@ -97,5 +97,4 @@ void quicksort(int *number_list, int start, int end, int reverse)
         quicksort(number_list, start, pivot, reverse);
         quicksort(number_list, pivot + 1, end, reverse);
     }
-    // return number_list;
 }
