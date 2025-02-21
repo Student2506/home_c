@@ -15,8 +15,8 @@ int max_find(int max)
     scanf("%d", &num);
     if (num == 0)
         return max;
-    if (num > max)
-        max_find(num);
-    else
-        max_find(max);
+    max = max_find(max);
+    if (max < num)
+        max = num;
+    return max;
 }

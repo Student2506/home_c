@@ -14,7 +14,6 @@ int bin_converter(int number)
 {
     if (number == 0 || number == 1)
     {
-        // printf("%d", number);
         return number;
     }
     return number % 2 + bin_converter(number / 2);
