@@ -8,12 +8,13 @@
 
 static int remove_duplicates(int *, int);
 void print_temp_by_month(int, float, int, int);
+void print_stats_per_year(TempDate[], int, int);
 int compare(const void *a, const void *b)
 {
     return (*(int *)a - *(int *)b);
 }
 
-float temp_per_month(TempDate temps[], int length, int month, int year)
+float average_temp_per_month(TempDate temps[], int length, int month, int year)
 {
     int accum_temp = 0;
     int qty_month_in_array = 0;
@@ -25,7 +26,6 @@ float temp_per_month(TempDate temps[], int length, int month, int year)
             qty_month_in_array++;
         }
     }
-
     return qty_month_in_array != 0 ? (float)accum_temp / qty_month_in_array : INFINITY;
 }
 int min_per_month(TempDate temps[], int length, int month, int year)
@@ -52,7 +52,7 @@ int max_per_month(TempDate temps[], int length, int month, int year)
     }
     return max;
 }
-void print_stat_per_year(TempDate stats[], int length)
+void print_stat_by_year(TempDate stats[], int length)
 {
     int from_year = INT_MAX, to_year = INT_MIN;
     int *years = malloc(length * sizeof(int));
@@ -70,37 +70,56 @@ void print_stat_per_year(TempDate stats[], int length)
         if (years[i] > to_year)
             to_year = years[i];
     }
+
     for (int year = from_year; year <= to_year; year++)
     {
-        float accum_temp = 0.0f;
-        int min_per_year = INT_MAX, max_per_year = INT_MIN;
-        int month_qty_in_stats = 0;
-        for (int month = 1; month <= 12; month++)
-        {
-            float current_temp = temp_per_month(stats, length, month, year);
-            if (isfinite(current_temp))
-            {
-                accum_temp += current_temp;
-                month_qty_in_stats++;
-            }
-            int min_per_month_value = min_per_month(stats, length, month, year);
-            int max_per_month_value = max_per_month(stats, length, month, year);
-            min_per_year > min_per_month_value ? min_per_year = min_per_month_value : min_per_year;
-            max_per_year < max_per_month_value ? max_per_year = max_per_month_value : max_per_year;
-        }
-        printf("====================\n");
-        if (month_qty_in_stats == 0)
-            month_qty_in_stats = 1;
-        printf("%d:\nAverage %.2f\nMin %d\nMax %d\n", year, accum_temp / (float)month_qty_in_stats, min_per_year, max_per_year);
-        printf("Month quantity: %d\n", month_qty_in_stats);
+        print_stats_per_year(stats, length, year);
     }
     free(years);
+}
+
+void print_stats_per_year(TempDate stats[], int length, int year)
+{
+    printf("Статистика за %d год\n", year);
+    float accum_temp = 0.0f;
+    int min_per_year = INT_MAX, max_per_year = INT_MIN;
+    int month_qty_in_stats = 0;
+    for (int month = 1; month <= 12; month++)
+    {
+        float average_temp = average_temp_per_month(stats, length, month, year);
+        if (isfinite(average_temp))
+        {
+            accum_temp += average_temp;
+            month_qty_in_stats++;
+        }
+        int min_per_month_value = min_per_month(stats, length, month, year);
+        int max_per_month_value = max_per_month(stats, length, month, year);
+        min_per_year > min_per_month_value ? min_per_year = min_per_month_value : min_per_year;
+        max_per_year < max_per_month_value ? max_per_year = max_per_month_value : max_per_year;
+        print_temp_by_month(month, average_temp, min_per_month_value, max_per_month_value);
+    }
+    if (month_qty_in_stats == 0)
+        month_qty_in_stats = 1;
+    printf("За год:\nСредняя: %.2f\nМинимальная: %d\nМаксимальная: %d\n\n", accum_temp / (float)month_qty_in_stats, min_per_year, max_per_year);
+}
+
+void print_stats_per_month(TempDate stats[], int length, int year, int month)
+{
+    float average_temp = average_temp_per_month(stats, length, month, year);
+    int min_per_month_value = min_per_month(stats, length, month, year);
+    int max_per_month_value = max_per_month(stats, length, month, year);
+    print_temp_by_month(month, average_temp, min_per_month_value, max_per_month_value);
 }
 
 void print_temp_by_month(int month_number, float average, int min_temp, int max_temp)
 {
     char *month[] = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
-    printf("Температура за %s:\nСредняя: %.2f градусов Целсия\nМинимальная: %d градусов Целсия\nМаксимальная: %d градусов Целсия\n", month[month_number - 1], average, min_temp, max_temp);
+    if (!isfinite(average))
+    {
+        printf("Температура за %s остутствует.\n", month[month_number - 1]);
+        return;
+    }
+    printf("Температура за %s:\nСредняя: %.2f градусов Целсия\nМинимальная: %d градусов Целсия\nМаксимальная: %d градусов Целсия\n\n", month[month_number - 1], average, min_temp, max_temp);
 }
 
 static int remove_duplicates(int *years, int length)

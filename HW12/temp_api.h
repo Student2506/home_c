@@ -12,8 +12,9 @@ typedef struct
     int8_t temperature;
 } TempDate;
 
-float temp_per_month(TempDate[], int, int, int);
+float average_temp_per_month(TempDate[], int, int, int);
 int min_per_month(TempDate[], int, int, int);
 int max_per_month(TempDate[], int, int, int);
-void print_stat_per_year(TempDate[], int);
+void print_stat_by_year(TempDate[], int);
+void print_stats_per_month(TempDate[], int, int, int);
 #endif /* __TEMP_API_H__ */

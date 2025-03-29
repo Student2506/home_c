@@ -12,7 +12,7 @@ int compare(const void *a, const void *b)
     return (*(int *)a - *(int *)b);
 }
 
-float temp_per_month(TempDate temps[], int length, int month, int year)
+float average_temp_per_month(TempDate temps[], int length, int month, int year)
 {
     int accum_temp = 0;
     int qty_month_in_array = 0;
@@ -51,7 +51,7 @@ int max_per_month(TempDate temps[], int length, int month, int year)
     }
     return max;
 }
-void print_stat_per_year(TempDate stats[], int length)
+void print_stat_by_year(TempDate stats[], int length)
 {
     int from_year = INT_MAX, to_year = INT_MIN;
     int *years = malloc(length * sizeof(int));
@@ -76,7 +76,7 @@ void print_stat_per_year(TempDate stats[], int length)
         int month_qty_in_stats = 0;
         for (int month = 1; month <= 12; month++)
         {
-            float current_temp = temp_per_month(stats, length, month, year);
+            float current_temp = average_temp_per_month(stats, length, month, year);
             if (isfinite(current_temp))
             {
                 accum_temp += current_temp;

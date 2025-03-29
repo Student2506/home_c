@@ -35,9 +35,9 @@ int main(void)
         {2012, 2, 1, 8, 0, 15},
         {2012, 2, 4, 8, 0, 30},
     };
-    printf("%.2f\n", temp_per_month(data, 30, 1, 2010));
+    printf("%.2f\n", average_temp_per_month(data, 30, 1, 2010));
     printf("%d\n", max_per_month(data, 30, 1, 2010));
     printf("%d\n", min_per_month(data, 30, 1, 2010));
-    print_stat_per_year(data, 30);
+    print_stat_by_year(data, 30);
     return 0;
 }

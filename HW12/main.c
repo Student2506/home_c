@@ -1,16 +1,21 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
+#include <locale.h>
 #include "temp_api.h"
 
 #define LIMIT 256
 
 int main(int argc, char *argv[])
 {
+    setlocale(LC_ALL, "ru_RU.utf8");
 
     char filename[LIMIT] = {'\0'};
+    int month = -1;
+
     int result = 0;
-    while ((result = getopt(argc, argv, "hf:m")) != -1)
+    while ((result = getopt(argc, argv, "hf:m:")) != -1)
     {
         opterr = 0;
         switch (result)
@@ -25,6 +30,7 @@ int main(int argc, char *argv[])
             strcpy(filename, optarg);
             break;
         case 'm':
+            month = atoi(optarg);
             break;
         case '?':
             printf("Unknown argument: %s Try -h for help\n", argv[optind - 1]);
@@ -70,9 +76,14 @@ int main(int argc, char *argv[])
         {2012, 2, 1, 8, 0, 15},
         {2012, 2, 4, 8, 0, 30},
     };
-    printf("%.2f\n", temp_per_month(data, 30, 1, 2010));
-    printf("%d\n", max_per_month(data, 30, 1, 2010));
-    printf("%d\n", min_per_month(data, 30, 1, 2010));
-    print_stat_per_year(data, 30);
+    if (month >= 0)
+    {
+        print_stats_per_month(data, 30, 2010, month);
+        return 0;
+    }
+    // printf("%.2f\n", average_temp_per_month(data, 30, 1, 2010));
+    // printf("%d\n", max_per_month(data, 30, 1, 2010));
+    // printf("%d\n", min_per_month(data, 30, 1, 2010));
+    print_stat_by_year(data, 30);
     return 0;
 }
