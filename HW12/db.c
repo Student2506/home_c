@@ -40,19 +40,26 @@ TempDate *create_array(int intial_size)
     return new_array;
 }
 
-int partition(TempDate *array, int left, int right)
+int partition(TempDate *array, int left, int right, int by_date)
 {
     TempDate pivot = array[(left + right) / 2];
     while (1)
     {
-        int pivot_date = convert_date_to_int(pivot);
-        int current_value = convert_date_to_int(array[left]);
-        while (current_value < pivot_date)
+        int pivot_value = pivot.temperature;
+        int left_value = array[left].temperature;
+        int right_value = array[right].temperature;
+        if (by_date == 1)
+        {
+            pivot_value = convert_date_to_int(pivot);
+            left_value = convert_date_to_int(array[left]);
+            right_value = convert_date_to_int(array[right]);
+        }
+        while (left_value < pivot_value)
         {
             left++;
         }
-        int current_value = convert_date_to_int(array[right]);
-        while (pivot_date < current_value)
+
+        while (pivot_value < right_value)
         {
             right--;
         }
@@ -68,14 +75,19 @@ int partition(TempDate *array, int left, int right)
     }
 }
 
-void sort_array(TempDate *array, int start, int end)
+void sort_array(TempDate *array, int start, int end, int by_date)
 {
     if (start >= 0 && end >= 0 && start < end)
     {
         int length = end - start;
-        int start_date = convert_date_to_int(array[start]);
-        int end_date = convert_date_to_int(array[end]);
-        if (start_date > end_date)
+        int start_value = array[start].temperature;
+        int end_value = array[end].temperature;
+        if (by_date == 1)
+        {
+            start_value = convert_date_to_int(array[start]);
+            end_value = convert_date_to_int(array[end]);
+        }
+        if (start_value > end_value)
         {
             TempDate temp = array[start];
             array[start] = array[end];
@@ -83,13 +95,13 @@ void sort_array(TempDate *array, int start, int end)
         }
         if (length < 1)
             return;
-        int pivot = partition(array, start, end);
-        quicksort(array, start, pivot);
-        quicksort(array, pivot + 1, end);
+        int pivot = partition(array, start, end, by_date);
+        quicksort(array, start, pivot, by_date);
+        quicksort(array, pivot + 1, end, by_date);
     }
 }
 
 int convert_date_to_int(TempDate value)
 {
-    return (((value.year * 100 + value.MM) * 100 + value.dd) * 100 + value.hh) * 100 + value.mm;
+    return value.year << 16 | value.MM << 8 | value.dd << 8 | value.hh << 8 | value.mm;
 }
