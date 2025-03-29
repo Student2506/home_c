@@ -1,8 +1,43 @@
 #include <stdio.h>
+#include <unistd.h>
+#include <string.h>
 #include "temp_api.h"
 
-int main(void)
+#define LIMIT 256
+
+int main(int argc, char *argv[])
 {
+
+    char filename[LIMIT] = {'\0'};
+    int result = 0;
+    while ((result = getopt(argc, argv, "hf:m")) != -1)
+    {
+        opterr = 0;
+        switch (result)
+        {
+        case 'h':
+            printf("Usage: %s [options]\n", argv[0]);
+            printf("-h This help text\n");
+            printf("-f Input csv file for processing\n");
+            printf("-m Month to show stats about\n");
+            return 0;
+        case 'f':
+            strcpy(filename, optarg);
+            break;
+        case 'm':
+            break;
+        case '?':
+            printf("Unknown argument: %s Try -h for help\n", argv[optind - 1]);
+            return 1;
+        }
+    }
+    if (strlen(filename) == 0)
+    {
+        printf("Filename is mandatory\n");
+        return 1;
+    }
+    printf("Processing %s\n", filename);
+
     TempDate data[] = {
         {2010, 1, 1, 8, 0, 30},
         {2010, 1, 2, 8, 0, 28},

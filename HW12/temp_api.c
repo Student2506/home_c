@@ -7,6 +7,7 @@
 #include <math.h>
 
 static int remove_duplicates(int *, int);
+void print_temp_by_month(int, float, int, int);
 int compare(const void *a, const void *b)
 {
     return (*(int *)a - *(int *)b);
@@ -94,6 +95,12 @@ void print_stat_per_year(TempDate stats[], int length)
         printf("Month quantity: %d\n", month_qty_in_stats);
     }
     free(years);
+}
+
+void print_temp_by_month(int month_number, float average, int min_temp, int max_temp)
+{
+    char *month[] = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
+    printf("Температура за %s:\nСредняя: %.2f градусов Целсия\nМинимальная: %d градусов Целсия\nМаксимальная: %d градусов Целсия\n", month[month_number - 1], average, min_temp, max_temp);
 }
 
 static int remove_duplicates(int *years, int length)
