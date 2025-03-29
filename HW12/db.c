@@ -40,7 +40,7 @@ TempDate *create_array(int intial_size)
     return new_array;
 }
 
-int partition(TempDate *array, int left, int right, int by_date)
+static partition(TempDate *array, int left, int right, int by_date)
 {
     TempDate pivot = array[(left + right) / 2];
     while (1)
@@ -101,7 +101,7 @@ void sort_array(TempDate *array, int start, int end, int by_date)
     }
 }
 
-int convert_date_to_int(TempDate value)
+static convert_date_to_int(TempDate value)
 {
     return value.year << 16 | value.MM << 8 | value.dd << 8 | value.hh << 8 | value.mm;
 }

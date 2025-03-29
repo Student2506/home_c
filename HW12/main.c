@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include "temp_api.h"
+#include "db.h"
 
 #define LIMIT 256
 
