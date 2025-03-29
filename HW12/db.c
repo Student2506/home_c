@@ -105,3 +105,18 @@ int convert_date_to_int(TempDate value)
 {
     return value.year << 16 | value.MM << 8 | value.dd << 8 | value.hh << 8 | value.mm;
 }
+
+void print_array(TempDate *array, int length)
+{
+    for (int i = 0; i < length; i++)
+    {
+        printf(
+            "%d %d %d %d %d %d\n",
+            array[i].year,
+            array[i].MM,
+            array[i].dd,
+            array[i].hh,
+            array[i].mm,
+            array[i].temperature);
+    }
+}

@@ -4,6 +4,7 @@
 void add_record(TempDate[], int *, uint16_t, uint8_t, uint8_t, uint8_t, uint8_t, int8_t);
 void remove_record(TempDate[], int *, uint16_t, uint8_t, uint8_t, uint8_t, uint8_t);
 TempDate *create_array(int);
-void sort_array(TempDate *, int, int);
+void sort_array(TempDate *, int, int, int);
+void print_array(TempDate *array, int length);
 
 #endif /* __DB_H__ */
