@@ -99,7 +99,7 @@ void print_temp_by_month(int month_number, float average, int min_temp, int max_
   char *month[] = {_("January"), _("February"), _("March"),     _("April"),   _("May"),      _("June"),
                    _("July"),    _("August"),   _("September"), _("October"), _("November"), _("December")};
   if (!isfinite(average)) {
-    printf("Temperature for the %sth month is absent.\n", month[month_number - 1]);
+    printf(_("Temperature for the %s is absent.\n"), month[month_number - 1]);
     return;
   }
   printf(_("Temperature for %s:\nAverage: %.2f degrees Celsius\nMinimal: %d degrees Celsius\nMaximal: %d "
