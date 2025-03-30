@@ -85,6 +85,12 @@ int main(int argc, char *argv[])
     {
         add_record(array, &current_qty, data[i].year, data[i].MM, data[i].dd, data[i].hh, data[i].mm, data[i].temperature);
     }
+
+    if (month >= 0)
+    {
+        print_stats_per_month(data, current_qty, 2010, month);
+        return 0;
+    }
     print_array(array, current_qty);
     sort_array(array, 0, current_qty - 1, 0); // sort by temperature
     print_array(array, current_qty);
@@ -92,5 +98,8 @@ int main(int argc, char *argv[])
     print_array(array, current_qty);
     drop_array(array);
 
-    return 0;
+    // printf("%.2f\n", average_temp_per_month(data, 30, 1, 2010));
+    // printf("%d\n", max_per_month(data, 30, 1, 2010));
+    // printf("%d\n", min_per_month(data, 30, 1, 2010));
+    // print_stat_by_year(data, 30);    return 0;
 }
