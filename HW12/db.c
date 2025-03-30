@@ -1,6 +1,9 @@
 #include "db.h"
 #include "temp_api.h"
 #include <stdlib.h>
+#include <stdio.h>
+
+static uint64_t convert_date_to_int(TempDate);
 
 void add_record(TempDate array[], int *current_length, uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, int8_t temperature)
 {
@@ -11,7 +14,7 @@ void add_record(TempDate array[], int *current_length, uint16_t year, uint8_t mo
     new_element.hh = hour;
     new_element.temperature = temperature;
     array[*current_length] = new_element;
-    *current_length++;
+    (*current_length)++;
 }
 
 void remove_record(TempDate array[], int *current_length, uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute)
@@ -26,7 +29,7 @@ void remove_record(TempDate array[], int *current_length, uint16_t year, uint8_t
         if (record_to_delete != -1)
         {
             // Если текущая запись для удаления последняя, просто уменьшаем размер, иначе смещаемся вверх
-            if (i == current_length - 1)
+            if (i == *current_length - 1)
                 break;
             array[i] = array[i + 1];
         }
@@ -40,28 +43,43 @@ TempDate *create_array(int intial_size)
     return new_array;
 }
 
-static partition(TempDate *array, int left, int right, int by_date)
+static int partition(TempDate *array, int left, int right, int by_date)
 {
     TempDate pivot = array[(left + right) / 2];
     while (1)
     {
-        int pivot_value = pivot.temperature;
-        int left_value = array[left].temperature;
-        int right_value = array[right].temperature;
+        uint64_t pivot_value = pivot.temperature;
+        uint64_t left_value = array[left].temperature;
+        uint64_t right_value = array[right].temperature;
         if (by_date == 1)
         {
             pivot_value = convert_date_to_int(pivot);
             left_value = convert_date_to_int(array[left]);
             right_value = convert_date_to_int(array[right]);
         }
+
         while (left_value < pivot_value)
         {
             left++;
+            pivot_value = pivot.temperature;
+            left_value = array[left].temperature;
+            if (by_date == 1)
+            {
+                pivot_value = convert_date_to_int(pivot);
+                left_value = convert_date_to_int(array[left]);
+            }
         }
 
         while (pivot_value < right_value)
         {
             right--;
+            pivot_value = pivot.temperature;
+            right_value = array[right].temperature;
+            if (by_date == 1)
+            {
+                pivot_value = convert_date_to_int(pivot);
+                right_value = convert_date_to_int(array[right]);
+            }
         }
         if (right <= left)
         {
@@ -80,8 +98,8 @@ void sort_array(TempDate *array, int start, int end, int by_date)
     if (start >= 0 && end >= 0 && start < end)
     {
         int length = end - start;
-        int start_value = array[start].temperature;
-        int end_value = array[end].temperature;
+        uint64_t start_value = array[start].temperature;
+        uint64_t end_value = array[end].temperature;
         if (by_date == 1)
         {
             start_value = convert_date_to_int(array[start]);
@@ -96,22 +114,29 @@ void sort_array(TempDate *array, int start, int end, int by_date)
         if (length < 1)
             return;
         int pivot = partition(array, start, end, by_date);
-        quicksort(array, start, pivot, by_date);
-        quicksort(array, pivot + 1, end, by_date);
+        sort_array(array, start, pivot, by_date);
+        sort_array(array, pivot + 1, end, by_date);
     }
 }
 
-static convert_date_to_int(TempDate value)
+static uint64_t convert_date_to_int(TempDate value)
 {
-    return value.year << 16 | value.MM << 8 | value.dd << 8 | value.hh << 8 | value.mm;
+    uint64_t new_value = value.year << 8;
+    new_value = (new_value | value.MM) << 8;
+    new_value = (new_value | value.dd) << 8;
+    new_value = (new_value | value.hh) << 8;
+    new_value |= value.mm;
+    return new_value;
 }
 
 void print_array(TempDate *array, int length)
 {
+    printf("============ Current stats ==========\n");
+    printf("Year Month Day Hour Minute Temperature\n");
     for (int i = 0; i < length; i++)
     {
         printf(
-            "%d %d %d %d %d %d\n",
+            "%4d %5d %3d %4d %6d %d\n",
             array[i].year,
             array[i].MM,
             array[i].dd,
@@ -119,4 +144,9 @@ void print_array(TempDate *array, int length)
             array[i].mm,
             array[i].temperature);
     }
+}
+
+void drop_array(TempDate *array)
+{
+    free(array);
 }

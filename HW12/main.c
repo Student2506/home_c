@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <unistd.h>
+#include <getopt.h>
 #include <string.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -77,14 +77,20 @@ int main(int argc, char *argv[])
         {2012, 2, 1, 8, 0, 15},
         {2012, 2, 4, 8, 0, 30},
     };
-    if (month >= 0)
+
+    int array_length = sizeof(data) / sizeof(data[0]);
+    TempDate *array = create_array(array_length);
+    int current_qty = 0;
+    for (int i = 0; i < array_length; i++)
     {
-        print_stats_per_month(data, 30, 2010, month);
-        return 0;
+        add_record(array, &current_qty, data[i].year, data[i].MM, data[i].dd, data[i].hh, data[i].mm, data[i].temperature);
     }
-    // printf("%.2f\n", average_temp_per_month(data, 30, 1, 2010));
-    // printf("%d\n", max_per_month(data, 30, 1, 2010));
-    // printf("%d\n", min_per_month(data, 30, 1, 2010));
-    print_stat_by_year(data, 30);
+    print_array(array, current_qty);
+    sort_array(array, 0, current_qty - 1, 0); // sort by temperature
+    print_array(array, current_qty);
+    sort_array(array, 0, current_qty - 1, 1); // sort by date
+    print_array(array, current_qty);
+    drop_array(array);
+
     return 0;
 }

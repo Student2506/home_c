@@ -1,12 +1,12 @@
 CC = gcc
 CFLAGS = -g
 
-objects = temp_api.o main.o
-prog: $(objects)
-	$(CC) $^ -o prog
+objects = temp_api.o main.o db.o
+all: $(objects)
+	$(CC) $(CFLAGS) $^ -o prog
 
 $(objects): %.o: %.c
-	$(CC) -c $^ -o $@
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean:
 	rm -rf *.o prog
