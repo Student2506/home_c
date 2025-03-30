@@ -1,4 +1,5 @@
 #include "db.h"
+#include "libintl.h"
 #include "temp_api.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,6 +15,7 @@ void add_record(TempDate array[], int *current_length, uint16_t year, uint8_t mo
   new_element.MM = month;
   new_element.dd = day;
   new_element.hh = hour;
+  new_element.mm = minute;
   new_element.temperature = temperature;
   array[*current_length] = new_element;
   (*current_length)++;
@@ -35,7 +37,7 @@ void remove_record(TempDate array[], int *current_length, uint16_t year, uint8_t
       array[i] = array[i + 1];
     }
   }
-  *current_length--;
+  (*current_length)--;
 }
 
 TempDate *create_array(int intial_size) {
@@ -118,9 +120,9 @@ static uint64_t convert_date_to_int(TempDate value) {
 
 void print_array(TempDate *array, int length) {
   printf(_("============ Current stats ==========\n"));
-  printf(_("Year Month Day Hour Minute Temperature\n"));
+  printf(_("Year  Month  Day  Hour  Minute  Temperature\n"));
   for (int i = 0; i < length; i++) {
-    printf("%4d %5d %3d %4d %6d %d\n", array[i].year, array[i].MM, array[i].dd, array[i].hh, array[i].mm,
+    printf("%-5d %-6d %-4d %-5d %-7d %d\n", array[i].year, array[i].MM, array[i].dd, array[i].hh, array[i].mm,
            array[i].temperature);
   }
 }
