@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
         case 'h':
             printf("Usage: %s [options]\n", argv[0]);
             printf("-h This help text\n");
-            printf("-f Input csv file for processing\n");
+            printf("-f Input csv file for processing (mandatory)\n");
             printf("-m Month to show stats about\n");
             return 0;
         case 'f':
