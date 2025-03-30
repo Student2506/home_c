@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define _(STRING) gettext(STRING)
+
 static uint64_t convert_date_to_int(TempDate);
 
 void add_record(TempDate array[], int *current_length, uint16_t year, uint8_t month, uint8_t day, uint8_t hour,
@@ -115,8 +117,8 @@ static uint64_t convert_date_to_int(TempDate value) {
 }
 
 void print_array(TempDate *array, int length) {
-  printf("============ Current stats ==========\n");
-  printf("Year Month Day Hour Minute Temperature\n");
+  printf(_("============ Current stats ==========\n"));
+  printf(_("Year Month Day Hour Minute Temperature\n"));
   for (int i = 0; i < length; i++) {
     printf("%4d %5d %3d %4d %6d %d\n", array[i].year, array[i].MM, array[i].dd, array[i].hh, array[i].mm,
            array[i].temperature);

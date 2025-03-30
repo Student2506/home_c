@@ -1,10 +1,13 @@
 #include "temp_api.h"
+#include "libintl.h"
 #include <float.h>
 #include <limits.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#define _(STRING) gettext(STRING)
 
 static int remove_duplicates(int *, int);
 void print_temp_by_month(int, float, int, int);
@@ -63,7 +66,7 @@ void print_stat_by_year(TempDate stats[], int length) {
 }
 
 void print_stats_per_year(TempDate stats[], int length, int year) {
-  printf("Статистика за %d год\n", year);
+  printf(_("Statistical data for the %dth year\n"), year);
   float accum_temp = 0.0f;
   int min_per_year = INT_MAX, max_per_year = INT_MIN;
   int month_qty_in_stats = 0;
@@ -81,7 +84,7 @@ void print_stats_per_year(TempDate stats[], int length, int year) {
   }
   if (month_qty_in_stats == 0)
     month_qty_in_stats = 1;
-  printf("За год:\nСредняя: %.2f\nМинимальная: %d\nМаксимальная: %d\n\n", accum_temp / (float)month_qty_in_stats,
+  printf(_("For year:\nAverage: %.2f\nMinimal: %d\nMaximal: %d\n\n"), accum_temp / (float)month_qty_in_stats,
          min_per_year, max_per_year);
 }
 
@@ -93,14 +96,14 @@ void print_stats_per_month(TempDate stats[], int length, int year, int month) {
 }
 
 void print_temp_by_month(int month_number, float average, int min_temp, int max_temp) {
-  char *month[] = {"Январь", "Февраль", "Март",     "Апрель",  "Май",    "Июнь",
-                   "Июль",   "Август",  "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
+  char *month[] = {_("January"), _("February"), _("March"),     _("April"),   _("May"),      _("June"),
+                   _("July"),    _("August"),   _("September"), _("October"), _("November"), _("December")};
   if (!isfinite(average)) {
-    printf("Температура за %s остутствует.\n", month[month_number - 1]);
+    printf("Temperature for the %sth month is absent.\n", month[month_number - 1]);
     return;
   }
-  printf("Температура за %s:\nСредняя: %.2f градусов Целсия\nМинимальная: %d градусов Целсия\nМаксимальная: %d "
-         "градусов Целсия\n\n",
+  printf(_("Temperature for %s:\nAverage: %.2f degrees Celsius\nMinimal: %d degrees Celsius\nMaximal: %d "
+           "degrees Celsius\n\n"),
          month[month_number - 1], average, min_temp, max_temp);
 }
 

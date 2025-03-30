@@ -1,4 +1,5 @@
 #include "db.h"
+#include "libintl.h"
 #include "temp_api.h"
 #include <getopt.h>
 #include <locale.h>
@@ -7,9 +8,12 @@
 #include <string.h>
 
 #define LIMIT 256
+#define _(STRING) gettext(STRING)
 
 int main(int argc, char *argv[]) {
-  setlocale(LC_ALL, "ru_RU.utf8");
+  setlocale(LC_ALL, "");
+  bindtextdomain("sensor_reader", "./");
+  textdomain("sensor_reader");
 
   char filename[LIMIT] = {'\0'};
   int month = -1;
@@ -19,10 +23,10 @@ int main(int argc, char *argv[]) {
     opterr = 0;
     switch (result) {
     case 'h':
-      printf("Usage: %s [options]\n", argv[0]);
-      printf("-h This help text\n");
-      printf("-f Input csv file for processing (mandatory)\n");
-      printf("-m Month to show stats about\n");
+      printf(_("Usage: %s [options]\n"), argv[0]);
+      printf(_("-h This help text\n"));
+      printf(_("-f Input csv file for processing (mandatory)\n"));
+      printf(_("-m Month to show stats about\n"));
       return 0;
     case 'f':
       strcpy(filename, optarg);
