@@ -73,5 +73,6 @@ int main(int argc, char *argv[]) {
   // printf("%.2f\n", average_temp_per_month(data, 30, 1, 2010));
   // printf("%d\n", max_per_month(data, 30, 1, 2010));
   // printf("%d\n", min_per_month(data, 30, 1, 2010));
-  // print_stat_by_year(data, 30);    return 0;
+  print_stat_by_year(data, current_qty);
+  return 0;
 }
