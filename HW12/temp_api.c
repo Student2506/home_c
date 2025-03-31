@@ -102,9 +102,10 @@ void print_temp_by_month(int month_number, float average, int min_temp, int max_
     printf(_("Temperature for the %s is absent.\n"), month[month_number - 1]);
     return;
   }
-  printf(_("Temperature for %s:\nAverage: %.2f degrees Celsius\nMinimal: %d degrees Celsius\nMaximal: %d "
-           "degrees Celsius\n\n"),
-         month[month_number - 1], average, min_temp, max_temp);
+  printf(_("Temperature for %s:\n"), month[month_number - 1]);
+  printf(ngettext("Average: %.2f degree Celsius\n", "Average: %.2f degrees Celsius\n", (int)average), average);
+  printf(ngettext("Minimal: %d degree Celsius\n", "Minimal: %d degrees Celsius\n", (int)min_temp), min_temp);
+  printf(ngettext("Maximal: %d degree Celsius\n\n", "Maximal: %d degrees Celsius\n\n", (int)max_temp), max_temp);
 }
 
 static int remove_duplicates(int *years, int length) {
