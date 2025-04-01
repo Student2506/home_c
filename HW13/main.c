@@ -35,15 +35,15 @@ int main(int argc, char *argv[]) {
       month = atoi(optarg);
       break;
     case '?':
-      printf("Unknown argument: %s Try -h for help\n", argv[optind - 1]);
+      printf(_("Unknown argument: %s Try -h for help\n"), argv[optind - 1]);
       return 1;
     }
   }
   if (strlen(filename) == 0) {
-    printf("Filename is mandatory\n");
+    printf(_("Filename is mandatory\n"));
     return 1;
   }
-  printf("Processing %s\n", filename);
+  printf(_("Processing %s\n"), filename);
 
   TempDate data[] = {
       {2010, 1, 1, 8, 0, 30},  {2010, 1, 2, 8, 0, 28}, {2010, 1, 3, 8, 0, 15},  {2010, 1, 4, 8, 0, 16},
