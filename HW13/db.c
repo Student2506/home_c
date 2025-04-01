@@ -91,12 +91,7 @@ int64_t comparatorDate(const void *left, const void *right) {
 }
 
 static int64_t convert_date_to_int(TempDate value) {
-  int64_t new_value = value.year << 8;
-  new_value = (new_value | value.MM) << 8;
-  new_value = (new_value | value.dd) << 8;
-  new_value = (new_value | value.hh) << 8;
-  new_value |= value.mm;
-  return new_value;
+  return (((((uint64_t)value.year << 8 | value.MM) << 8 | value.dd) << 8 | value.hh) << 8) | value.mm;
 }
 
 void print_array(TempDate *array, int length) {
