@@ -20,7 +20,7 @@
 #define _LIBINTL_H 1
 
 #include <locale.h>
-
+#define _(STRING) gettext(STRING)
 /* The LC_MESSAGES locale category is the category used by the functions
    gettext() and dgettext().  It is specified in POSIX, but not in ANSI C.
    On systems that don't define it, use an arbitrary value instead.

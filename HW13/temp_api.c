@@ -7,8 +7,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define _(STRING) gettext(STRING)
-
 static int remove_duplicates(int *, int);
 void print_temp_by_month(int, float, int, int);
 void print_stats_per_year(TempDate[], int, int);
@@ -84,8 +82,11 @@ void print_stats_per_year(TempDate stats[], int length, int year) {
   }
   if (month_qty_in_stats == 0)
     month_qty_in_stats = 1;
-  printf(_("For year:\nAverage: %.2f\nMinimal: %d\nMaximal: %d\n\n"), accum_temp / (float)month_qty_in_stats,
-         min_per_year, max_per_year);
+  printf(ngettext("For year:\nAverage: %.2f degree Celsius\n", "For year:\nAverage: %.2f degrees Celsius\n",
+                  accum_temp / month_qty_in_stats),
+         accum_temp / (float)month_qty_in_stats);
+  printf(ngettext("Minimal: %d degree Celsius\n", "Minimal: %d degrees Celsius\n", min_per_year), min_per_year);
+  printf(ngettext("Maximal: %d degree Celsius\n\n", "Maximal: %d degrees Celsius\n\n", max_per_year), max_per_year);
 }
 
 void print_stats_per_month(TempDate stats[], int length, int year, int month) {
@@ -104,8 +105,8 @@ void print_temp_by_month(int month_number, float average, int min_temp, int max_
   }
   printf(_("Temperature for %s:\n"), month[month_number - 1]);
   printf(ngettext("Average: %.2f degree Celsius\n", "Average: %.2f degrees Celsius\n", (int)average), average);
-  printf(ngettext("Minimal: %d degree Celsius\n", "Minimal: %d degrees Celsius\n", (int)min_temp), min_temp);
-  printf(ngettext("Maximal: %d degree Celsius\n\n", "Maximal: %d degrees Celsius\n\n", (int)max_temp), max_temp);
+  printf(ngettext("Minimal: %d degree Celsius\n", "Minimal: %d degrees Celsius\n", min_temp), min_temp);
+  printf(ngettext("Maximal: %d degree Celsius\n\n", "Maximal: %d degrees Celsius\n\n", max_temp), max_temp);
 }
 
 static int remove_duplicates(int *years, int length) {

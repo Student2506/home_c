@@ -1,5 +1,6 @@
 #include "db.h"
 #include "libintl.h"
+#include "parser.h"
 #include "temp_api.h"
 #include <getopt.h>
 #include <locale.h>
@@ -8,18 +9,19 @@
 #include <string.h>
 
 #define LIMIT 256
-#define _(STRING) gettext(STRING)
 
 int main(int argc, char *argv[]) {
   setlocale(LC_ALL, "");
   bindtextdomain("sensor_reader", "./");
   textdomain("sensor_reader");
+  char verbose = 0;
 
   char filename[LIMIT] = {'\0'};
   int month = -1;
+  char sort_order[LIMIT] = {'\0'};
 
   int result = 0;
-  while ((result = getopt(argc, argv, "hf:m:")) != -1) {
+  while ((result = getopt(argc, argv, "hf:m:s:v")) != -1) {
     opterr = 0;
     switch (result) {
     case 'h':
@@ -27,6 +29,8 @@ int main(int argc, char *argv[]) {
       printf(_("-h This help text\n"));
       printf(_("-f Input csv file for processing (mandatory)\n"));
       printf(_("-m Month to show stats about\n"));
+      printf(_("-s {date|temp} Sorts data accordinglly\n"));
+      printf(_("-v Show file content, with optional sorting.\n"));
       return 0;
     case 'f':
       strcpy(filename, optarg);
@@ -34,50 +38,47 @@ int main(int argc, char *argv[]) {
     case 'm':
       month = atoi(optarg);
       break;
+    case 's':
+      strcpy(sort_order, optarg);
+      break;
+    case 'v':
+      verbose = 1;
+      break;
     case '?':
       printf(_("Unknown argument: %s Try -h for help\n"), argv[optind - 1]);
       return 1;
     }
   }
   if (strlen(filename) == 0) {
-    printf(_("Filename is mandatory\n"));
+    printf(_("Filename is mandatory\nTry -h for help\n"));
     return 1;
   }
   printf(_("Processing %s\n"), filename);
-
-  TempDate data[] = {
-      {2010, 1, 1, 8, 0, 30},  {2010, 1, 2, 8, 0, 28}, {2010, 1, 3, 8, 0, 15},  {2010, 1, 4, 8, 0, 16},
-      {2010, 1, 5, 8, 0, 16},  {2010, 2, 1, 8, 0, 30}, {2010, 3, 2, 8, 0, 28},  {2010, 4, 3, 8, 0, 15},
-      {2010, 5, 4, 8, 0, 16},  {2010, 6, 5, 8, 0, 16}, {2010, 7, 1, 8, 0, 30},  {2010, 8, 2, 8, 0, 28},
-      {2010, 8, 3, 8, 0, 15},  {2010, 9, 4, 8, 0, 16}, {2010, 10, 5, 8, 0, 16}, {2010, 11, 1, 8, 0, 30},
-      {2010, 12, 2, 8, 0, 28}, {2010, 3, 3, 8, 0, 15}, {2010, 4, 4, 8, 0, 16},  {2010, 5, 5, 8, 0, 16},
-      {2010, 6, 1, 8, 0, 14},  {2010, 7, 1, 8, 0, 14}, {2010, 3, 1, 8, 0, 3},   {2011, 1, 1, 8, 0, 3},
-      {2011, 2, 1, 8, 0, 17},  {2011, 3, 1, 8, 0, 30}, {2011, 4, 1, 8, 0, 28},  {2012, 1, 1, 8, 0, 30},
-      {2012, 2, 1, 8, 0, 15},  {2012, 2, 4, 8, 0, 30},
-  };
-
-  int array_length = sizeof(data) / sizeof(data[0]);
-  TempDate *array = create_array(array_length);
-  int current_qty = 0;
-  for (int i = 0; i < array_length; i++) {
-    add_record(array, &current_qty, data[i].year, data[i].MM, data[i].dd, data[i].hh, data[i].mm, data[i].temperature);
-  }
+  int rows_count = count_rows(filename);
+  if (rows_count == -1)
+    return 1;
+  printf(ngettext("File contains %d row\n", "File contains %d rows\n", rows_count), rows_count);
+  TempDate *array = create_array(rows_count);
+  uint32_t current_qty = 0;
+  read_file(filename, array, &current_qty);
+  printf(ngettext("We have read %d line in total\n", "We have read %d lines in total\n", current_qty), current_qty);
+  printf("\n\n");
 
   if (month >= 0) {
-    print_stats_per_month(data, current_qty, 2010, month);
+    print_stats_per_month(array, current_qty, array[0].year, month);
+    drop_array(array);
     return 0;
   }
-  print_array(array, current_qty);
-  sort_array(array, 0, current_qty - 1, comparatorTemp); // sort by temperature
-  print_array(array, current_qty);
-  sort_array(array, 0, current_qty - 1, comparatorDate); // sort by date
-  print_array(array, current_qty);
+  if (strcmp(sort_order, "date") == 0)
+    sort_array(array, 0, current_qty - 1, comparatorDate); // sort by date
+  if (strcmp(sort_order, "temp") == 0)
+    sort_array(array, 0, current_qty - 1, comparatorTemp); // sort by temperature
+
+  if (verbose == 1) {
+    print_array(array, current_qty);
+    printf("\n\n");
+  }
+  print_stat_by_year(array, current_qty);
   drop_array(array);
-
-  // printf("%.2f\n", average_temp_per_month(data, 30, 1, 2010));
-  // printf("%d\n", max_per_month(data, 30, 1, 2010));
-  // printf("%d\n", min_per_month(data, 30, 1, 2010));
-
-  // print_stat_by_year(data, current_qty);
   return 0;
 }

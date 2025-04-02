@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define _(STRING) gettext(STRING)
-
 static int64_t convert_date_to_int(TempDate);
 
 void add_record(TempDate array[], int *current_length, uint16_t year, uint8_t month, uint8_t day, uint8_t hour,
