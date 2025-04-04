@@ -2,12 +2,15 @@
 #include "libintl.h"
 #include <errno.h>
 #include <inttypes.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #define ROW_LIMIT 80
 #define DELIMTER ";"
 #define RADIX 10
+
+static bool is_date_correct(uint16_t, uint8_t, uint8_t, uint8_t, uint8_t);
 
 int count_rows(char *filename) {
   FILE *fp;
@@ -80,10 +83,35 @@ void read_file(char *filename, TempDate array[], uint32_t *current_length) {
       printf(_("Found error in row %d.\n"), fileLineCounter);
       continue;
     }
-    array[*current_length] = elem;
+    if (is_date_correct(elem.year, elem.MM, elem.dd, elem.hh, elem.mm))
+      array[*current_length] = elem;
+    else
+      continue;
     (*current_length)++;
   }
   fclose(fp);
+}
+
+static bool is_date_correct(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute) {
+  int normal_year[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+  int leap_year[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+  bool isLeapYear = false;
+  if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+    isLeapYear = true;
+  if (isLeapYear) {
+    if (day <= 0 || day > leap_year[month - 1])
+      return false;
+  } else {
+    if (day <= 0 || day > normal_year[month - 1])
+      return false;
+  }
+  if (month <= 0 || month > 12)
+    return false;
+  if (hour > 23)
+    return false;
+  if (minute > 59)
+    return false;
+  return true;
 }
 /*
     STRTOL check details
