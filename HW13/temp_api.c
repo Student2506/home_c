@@ -7,9 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// static int remove_duplicates(int *, int);
 void print_temp_by_month(int, float, int, int);
-void print_stats_per_year(sqlite3 *, int);
 int compare(const void *a, const void *b) { return (*(int *)a - *(int *)b); }
 
 double average_temp_per_month(sqlite3 *db, int month, int year) {
@@ -99,27 +97,6 @@ int max_per_month(sqlite3 *db, int month, int year) {
   sqlite3_finalize(stmt);
   return INT_MAX;
 }
-// void print_stat_by_year(sqlite3 *db) {
-//   int from_year = INT_MAX, to_year = INT_MIN;
-//   // // int *years = malloc(length * sizeof(int));
-//   // for (int i = 0; i < length; i++) {
-//   //   years[i] = stats[i].year;
-//   // }
-//   // qsort(years, length, sizeof(int), compare);
-//   // int new_length = remove_duplicates(years, length);
-
-//   // for (int i = 0; i < new_length; i++) {
-//   //   if (years[i] < from_year)
-//   //     from_year = years[i];
-//   //   if (years[i] > to_year)
-//   //     to_year = years[i];
-//   // }
-
-//   for (int year = from_year; year <= to_year; year++) {
-//     print_stats_per_year(db, year);
-//   }
-//   // free(years);
-// }
 
 void print_stat_per_year(sqlite3 *db) {
   char *query = "SELECT DISTINCT YEAR FROM TempDate;";
@@ -182,17 +159,3 @@ void print_temp_by_month(int month_number, float average, int min_temp, int max_
   printf(ngettext("Minimal: %d degree Celsius\n", "Minimal: %d degrees Celsius\n", min_temp), min_temp);
   printf(ngettext("Maximal: %d degree Celsius\n\n", "Maximal: %d degrees Celsius\n\n", max_temp), max_temp);
 }
-
-// static int remove_duplicates(int *years, int length) {
-//   int *out = malloc(length * sizeof(int));
-//   out[0] = years[0];
-//   int j = 0, i = 1;
-//   while (i < length) {
-//     if (years[i] != out[j])
-//       out[++j] = years[i];
-//     i++;
-//   }
-//   memcpy(years, out, (j + 1) * sizeof(int));
-//   free(out);
-//   return j + 1;
-// }
