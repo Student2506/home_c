@@ -1,3 +1,4 @@
+#include "sqlite3.h"
 #include <inttypes.h>
 
 #ifndef __TEMP_API_H__
@@ -11,9 +12,9 @@ typedef struct {
   int8_t temperature;
 } TempDate;
 
-float average_temp_per_month(TempDate[], int, int, int);
-int min_per_month(TempDate[], int, int, int);
-int max_per_month(TempDate[], int, int, int);
+double average_temp_per_month(sqlite3 *, int, int);
+int min_per_month(sqlite3 *, int, int);
+int max_per_month(sqlite3 *, int, int);
 void print_stat_by_year(TempDate[], int);
-void print_stats_per_month(TempDate[], int, int, int);
+void print_stats_per_month(sqlite3 *, int, int);
 #endif /* __TEMP_API_H__ */

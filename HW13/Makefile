@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -D__USE_MINGW_ANSI_STDIO -Wall -Wextra -Werror -std=gnu99
-LDFLAGS = -lintl.dll -liconv
+LDFLAGS = -lintl.dll -liconv -lsqlite3
 
 objects = temp_api.o main.o db.o parser.o
 all: $(objects)

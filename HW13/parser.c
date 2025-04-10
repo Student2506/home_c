@@ -31,12 +31,17 @@ int count_rows(char *filename) {
   return length;
 }
 
-void read_file(char *filename, TempDate array[], uint32_t *current_length) {
-
+void read_file(char *filename, sqlite3 *db, uint32_t *current_length) {
+  int rc = 0;
   FILE *fp = fopen(filename, "r");
   char *buffer = malloc(sizeof(char) * ROW_LIMIT);
   int fileLineCounter = 0;
+  rc = sqlite3_exec(db, "BEGIN TRANSACTION", 0, 0, 0);
   while (fgets(buffer, ROW_LIMIT, fp) != NULL) {
+    sqlite3_stmt *stmt = NULL;
+    rc = sqlite3_prepare_v2(
+        db, "INSERT INTO TempDate(YEAR, MONTH, DAY, HOUR, MINUTE, TEMPERATURE) VALUES (?, ?, ?, ?, ?, ?);", -1, &stmt,
+        NULL);
     fileLineCounter++;
     buffer[strcspn(buffer, "\n")] = 0;
     TempDate elem;
@@ -48,6 +53,7 @@ void read_file(char *filename, TempDate array[], uint32_t *current_length) {
       printf(_("Found error in row %d.\n"), fileLineCounter);
       continue;
     }
+    rc = sqlite3_bind_int(stmt, 1, elem.year);
     temp = strtok(NULL, DELIMTER);
     errno = 0;
     elem.MM = strtol(temp, &pEnd, RADIX);
@@ -55,6 +61,7 @@ void read_file(char *filename, TempDate array[], uint32_t *current_length) {
       printf(_("Found error in row %d.\n"), fileLineCounter);
       continue;
     }
+    rc = sqlite3_bind_int(stmt, 2, elem.MM);
     temp = strtok(NULL, DELIMTER);
     errno = 0;
     elem.dd = strtol(temp, &pEnd, RADIX);
@@ -62,6 +69,7 @@ void read_file(char *filename, TempDate array[], uint32_t *current_length) {
       printf(_("Found error in row %d.\n"), fileLineCounter);
       continue;
     }
+    rc = sqlite3_bind_int(stmt, 3, elem.dd);
     temp = strtok(NULL, DELIMTER);
     errno = 0;
     elem.hh = strtol(temp, &pEnd, RADIX);
@@ -69,6 +77,7 @@ void read_file(char *filename, TempDate array[], uint32_t *current_length) {
       printf(_("Found error in row %d.\n"), fileLineCounter);
       continue;
     }
+    rc = sqlite3_bind_int(stmt, 4, elem.hh);
     temp = strtok(NULL, DELIMTER);
     errno = 0;
     elem.mm = strtol(temp, &pEnd, RADIX);
@@ -76,6 +85,7 @@ void read_file(char *filename, TempDate array[], uint32_t *current_length) {
       printf(_("Found error in row %d.\n"), fileLineCounter);
       continue;
     }
+    rc = sqlite3_bind_int(stmt, 5, elem.mm);
     temp = strtok(NULL, DELIMTER);
     errno = 0;
     elem.temperature = strtol(temp, &pEnd, RADIX);
@@ -83,13 +93,17 @@ void read_file(char *filename, TempDate array[], uint32_t *current_length) {
       printf(_("Found error in row %d.\n"), fileLineCounter);
       continue;
     }
-    if (is_date_correct(elem.year, elem.MM, elem.dd, elem.hh, elem.mm))
-      array[*current_length] = elem;
-    else
+    rc = sqlite3_bind_int(stmt, 6, elem.temperature);
+    if (is_date_correct(elem.year, elem.MM, elem.dd, elem.hh, elem.mm)) {
+      rc = sqlite3_step(stmt);
+      rc = sqlite3_reset(stmt);
+    } else
       continue;
     (*current_length)++;
   }
+  rc = sqlite3_exec(db, "COMMIT", 0, 0, 0);
   fclose(fp);
+  printf("%d", rc);
 }
 
 static bool is_date_correct(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute) {

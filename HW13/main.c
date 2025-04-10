@@ -1,6 +1,7 @@
 #include "db.h"
 #include "libintl.h"
 #include "parser.h"
+#include "sqlite3.h"
 #include "temp_api.h"
 #include <getopt.h>
 #include <locale.h>
@@ -9,6 +10,7 @@
 #include <string.h>
 
 #define LIMIT 256
+#define DATABASE_FILENAME "sensor.db"
 
 int main(int argc, char *argv[]) {
   setlocale(LC_ALL, "");
@@ -58,27 +60,31 @@ int main(int argc, char *argv[]) {
   if (rows_count == -1)
     return 1;
   printf(ngettext("File contains %d row\n", "File contains %d rows\n", rows_count), rows_count);
-  TempDate *array = create_array(rows_count);
+  // TempDate *array = create_array(rows_count);
+  sqlite3 *db = NULL;
+  open_database(DATABASE_FILENAME, &db);
+  if (db == NULL)
+    return 1;
+  // clear_database(db);
   uint32_t current_qty = 0;
-  read_file(filename, array, &current_qty);
+  read_file(filename, db, &current_qty);
   printf(ngettext("We have read %d line in total\n", "We have read %d lines in total\n", current_qty), current_qty);
   printf("\n\n");
-
   if (month >= 0) {
-    print_stats_per_month(array, current_qty, array[0].year, month);
-    drop_array(array);
+    print_stats_per_month(db, 2021, month);
     return 0;
   }
-  if (strcmp(sort_order, "date") == 0)
-    sort_array(array, 0, current_qty - 1, comparatorDate); // sort by date
-  if (strcmp(sort_order, "temp") == 0)
-    sort_array(array, 0, current_qty - 1, comparatorTemp); // sort by temperature
+  // if (strcmp(sort_order, "date") == 0)
+  //   // sort_array(array, 0, current_qty - 1, comparatorDate); // sort by date
+  // if (strcmp(sort_order, "temp") == 0)
+  //   sort_array(array, 0, current_qty - 1, comparatorTemp); // sort by temperature
 
   if (verbose == 1) {
-    print_array(array, current_qty);
+    // print_array(array, current_qty);
     printf("\n\n");
   }
-  print_stat_by_year(array, current_qty);
-  drop_array(array);
+  // print_stat_by_year(array, current_qty);
+  // drop_array(array);
+  close_database(db);
   return 0;
 }
