@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
   open_database(DATABASE_FILENAME, &db);
   if (db == NULL)
     return 1;
-  // clear_database(db);
+  clear_database(db);
   uint32_t current_qty = 0;
   read_file(filename, db, &current_qty);
   printf(ngettext("We have read %d line in total\n", "We have read %d lines in total\n", current_qty), current_qty);

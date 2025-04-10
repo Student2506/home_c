@@ -17,17 +17,17 @@ double average_temp_per_month(sqlite3 *db, int month, int year) {
   sqlite3_stmt *stmt;
   rc = sqlite3_prepare_v2(db, query, -1, &stmt, 0);
   if (rc != SQLITE_OK) {
-    printf("Error\n");
+    fprintf(stderr, "Error sqlite3_prepare_v2 in average_temp_per_month %d\n", rc);
     return 0.0;
   }
   rc = sqlite3_bind_int(stmt, 1, month);
   if (rc != SQLITE_OK) {
-    printf("Error\n");
+    fprintf(stderr, "Error sqlite3_bind_int 1 in average_temp_per_month %d\n", rc);
     return 0.0;
   }
   rc = sqlite3_bind_int(stmt, 2, year);
   if (rc != SQLITE_OK) {
-    printf("Error\n");
+    fprintf(stderr, "Error sqlite3_bind_int 2 in average_temp_per_month %d\n", rc);
     return 0.0;
   }
   rc = sqlite3_step(stmt);
@@ -46,17 +46,17 @@ int min_per_month(sqlite3 *db, int month, int year) {
   sqlite3_stmt *stmt;
   rc = sqlite3_prepare_v2(db, query, -1, &stmt, 0);
   if (rc != SQLITE_OK) {
-    printf("Error\n");
+    fprintf(stderr, "Error sqlite3_prepare_v2 in min_per_month %d\n", rc);
     return 0.0;
   }
   rc = sqlite3_bind_int(stmt, 1, month);
   if (rc != SQLITE_OK) {
-    printf("Error\n");
+    fprintf(stderr, "Error sqlite3_bind_int 1 in min_per_month %d\n", rc);
     return 0.0;
   }
   rc = sqlite3_bind_int(stmt, 2, year);
   if (rc != SQLITE_OK) {
-    printf("Error\n");
+    fprintf(stderr, "Error sqlite3_bind_int 2 in min_per_month %d\n", rc);
     return 0.0;
   }
   rc = sqlite3_step(stmt);
@@ -75,17 +75,17 @@ int max_per_month(sqlite3 *db, int month, int year) {
   sqlite3_stmt *stmt;
   rc = sqlite3_prepare_v2(db, query, -1, &stmt, 0);
   if (rc != SQLITE_OK) {
-    printf("Error\n");
+    fprintf(stderr, "Error sqlite3_prepare_v2 in max_per_month %d\n", rc);
     return 0.0;
   }
   rc = sqlite3_bind_int(stmt, 1, month);
   if (rc != SQLITE_OK) {
-    printf("Error\n");
+    fprintf(stderr, "Error sqlite3_bind_int 1 in max_per_month %d\n", rc);
     return 0.0;
   }
   rc = sqlite3_bind_int(stmt, 2, year);
   if (rc != SQLITE_OK) {
-    printf("Error\n");
+    fprintf(stderr, "Error sqlite3_bind_int 2 in max_per_month %d\n", rc);
     return 0.0;
   }
   rc = sqlite3_step(stmt);
