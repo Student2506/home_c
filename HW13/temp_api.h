@@ -15,6 +15,6 @@ typedef struct {
 double average_temp_per_month(sqlite3 *, int, int);
 int min_per_month(sqlite3 *, int, int);
 int max_per_month(sqlite3 *, int, int);
-void print_stat_by_year(TempDate[], int);
+void print_stat_per_year(sqlite3 *);
 void print_stats_per_month(sqlite3 *, int, int);
 #endif /* __TEMP_API_H__ */

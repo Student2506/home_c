@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
     // print_array(array, current_qty);
     printf("\n\n");
   }
-  // print_stat_by_year(array, current_qty);
+  print_stat_per_year(db);
   // drop_array(array);
   close_database(db);
   return 0;
