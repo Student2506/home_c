@@ -104,7 +104,7 @@ void print_stat_per_year(sqlite3 *db) {
   sqlite3_stmt *stmt;
   rc = sqlite3_prepare_v2(db, query, -1, &stmt, 0);
   if (rc != SQLITE_OK) {
-    printf("Error\n");
+    printf("Error in print_stat_per_year\n");
     return;
   }
   rc = sqlite3_step(stmt);
@@ -140,7 +140,23 @@ void print_stat_per_year(sqlite3 *db) {
   printf(ngettext("Maximal: %d degree Celsius\n\n", "Maximal: %d degrees Celsius\n\n", max_per_year), max_per_year);
 }
 
-void print_stats_per_month(sqlite3 *db, int year, int month) {
+void print_stats_per_month(sqlite3 *db, int month) {
+  char *query = "SELECT DISTINCT YEAR FROM TempDate;";
+  int rc, year;
+  sqlite3_stmt *stmt;
+  rc = sqlite3_prepare_v2(db, query, -1, &stmt, 0);
+  if (rc != SQLITE_OK) {
+    printf("Error\n");
+    return;
+  }
+  rc = sqlite3_step(stmt);
+  if (rc == SQLITE_ROW) {
+    year = sqlite3_column_int(stmt, 0);
+    sqlite3_finalize(stmt);
+  } else {
+    sqlite3_finalize(stmt);
+    return;
+  }
   float average_temp = average_temp_per_month(db, month, year);
   int min_per_month_value = min_per_month(db, month, year);
   int max_per_month_value = max_per_month(db, month, year);

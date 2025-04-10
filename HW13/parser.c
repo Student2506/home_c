@@ -1,6 +1,6 @@
 #include "parser.h"
 #include "libintl.h"
-#include <errno.h>
+#include<errno.h>
 #include <inttypes.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -37,11 +37,19 @@ void read_file(char *filename, sqlite3 *db, uint32_t *current_length) {
   char *buffer = malloc(sizeof(char) * ROW_LIMIT);
   int fileLineCounter = 0;
   rc = sqlite3_exec(db, "BEGIN TRANSACTION", 0, 0, 0);
+  if (rc != SQLITE_OK) {
+    printf("Error in read_file\n");
+    return;
+  }
   while (fgets(buffer, ROW_LIMIT, fp) != NULL) {
     sqlite3_stmt *stmt = NULL;
     rc = sqlite3_prepare_v2(
         db, "INSERT INTO TempDate(YEAR, MONTH, DAY, HOUR, MINUTE, TEMPERATURE) VALUES (?, ?, ?, ?, ?, ?);", -1, &stmt,
         NULL);
+    if (rc != SQLITE_OK) {
+      printf("Error in sqlite3_prepare_v2\n");
+      return;
+    }
     fileLineCounter++;
     buffer[strcspn(buffer, "\n")] = 0;
     TempDate elem;
@@ -54,6 +62,10 @@ void read_file(char *filename, sqlite3 *db, uint32_t *current_length) {
       continue;
     }
     rc = sqlite3_bind_int(stmt, 1, elem.year);
+    if (rc != SQLITE_OK) {
+      printf("Error in sqlite3_bind_int 1\n");
+      return;
+    }
     temp = strtok(NULL, DELIMTER);
     errno = 0;
     elem.MM = strtol(temp, &pEnd, RADIX);
@@ -62,6 +74,10 @@ void read_file(char *filename, sqlite3 *db, uint32_t *current_length) {
       continue;
     }
     rc = sqlite3_bind_int(stmt, 2, elem.MM);
+    if (rc != SQLITE_OK) {
+      printf("Error in sqlite3_bind_int 2\n");
+      return;
+    }
     temp = strtok(NULL, DELIMTER);
     errno = 0;
     elem.dd = strtol(temp, &pEnd, RADIX);
@@ -70,6 +86,10 @@ void read_file(char *filename, sqlite3 *db, uint32_t *current_length) {
       continue;
     }
     rc = sqlite3_bind_int(stmt, 3, elem.dd);
+    if (rc != SQLITE_OK) {
+      printf("Error in sqlite3_bind_int 3\n");
+      return;
+    }
     temp = strtok(NULL, DELIMTER);
     errno = 0;
     elem.hh = strtol(temp, &pEnd, RADIX);
@@ -78,6 +98,10 @@ void read_file(char *filename, sqlite3 *db, uint32_t *current_length) {
       continue;
     }
     rc = sqlite3_bind_int(stmt, 4, elem.hh);
+    if (rc != SQLITE_OK) {
+      printf("Error in sqlite3_bind_int 4\n");
+      return;
+    }
     temp = strtok(NULL, DELIMTER);
     errno = 0;
     elem.mm = strtol(temp, &pEnd, RADIX);
@@ -86,6 +110,10 @@ void read_file(char *filename, sqlite3 *db, uint32_t *current_length) {
       continue;
     }
     rc = sqlite3_bind_int(stmt, 5, elem.mm);
+    if (rc != SQLITE_OK) {
+      printf("Error in sqlite3_bind_int 5\n");
+      return;
+    }
     temp = strtok(NULL, DELIMTER);
     errno = 0;
     elem.temperature = strtol(temp, &pEnd, RADIX);
@@ -94,16 +122,31 @@ void read_file(char *filename, sqlite3 *db, uint32_t *current_length) {
       continue;
     }
     rc = sqlite3_bind_int(stmt, 6, elem.temperature);
+    if (rc != SQLITE_OK) {
+      printf("Error in sqlite3_bind_int 6\n");
+      return;
+    }
     if (is_date_correct(elem.year, elem.MM, elem.dd, elem.hh, elem.mm)) {
       rc = sqlite3_step(stmt);
+      if (rc != SQLITE_DONE) {
+        printf("Error in sqlite3_step\n");
+        return;
+      }
       rc = sqlite3_reset(stmt);
+      if (rc != SQLITE_OK) {
+        printf("Error in sqlite3_reset\n");
+        return;
+      }
     } else
       continue;
     (*current_length)++;
   }
   rc = sqlite3_exec(db, "COMMIT", 0, 0, 0);
+  if (rc != SQLITE_OK) {
+    printf("Error in sqlite3_exec commit\n");
+    return;
+  }
   fclose(fp);
-  printf("%d", rc);
 }
 
 static bool is_date_correct(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute) {

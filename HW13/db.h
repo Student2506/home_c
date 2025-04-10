@@ -8,7 +8,7 @@
 // void remove_record(TempDate[], int *, uint16_t, uint8_t, uint8_t, uint8_t, uint8_t);
 // TempDate *create_array(int);
 // void sort_array(TempDate *array, int start, int end, int64_t (*comparator)(const void *, const void *));
-// void print_array(TempDate *, int);
+void print_array(sqlite3 *, int);
 // void drop_array(TempDate *);
 // int64_t comparatorTemp(const void *left, const void *right);
 // int64_t comparatorDate(const void *left, const void *right);

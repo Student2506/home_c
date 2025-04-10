@@ -3,7 +3,7 @@
 #include "parser.h"
 #include "sqlite3.h"
 #include "temp_api.h"
-#include <getopt.h>
+#include<getopt.h>
 #include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -60,7 +60,6 @@ int main(int argc, char *argv[]) {
   if (rows_count == -1)
     return 1;
   printf(ngettext("File contains %d row\n", "File contains %d rows\n", rows_count), rows_count);
-  // TempDate *array = create_array(rows_count);
   sqlite3 *db = NULL;
   open_database(DATABASE_FILENAME, &db);
   if (db == NULL)
@@ -71,20 +70,20 @@ int main(int argc, char *argv[]) {
   printf(ngettext("We have read %d line in total\n", "We have read %d lines in total\n", current_qty), current_qty);
   printf("\n\n");
   if (month >= 0) {
-    print_stats_per_month(db, 2021, month);
+    print_stats_per_month(db, month);
     return 0;
   }
-  // if (strcmp(sort_order, "date") == 0)
-  //   // sort_array(array, 0, current_qty - 1, comparatorDate); // sort by date
-  // if (strcmp(sort_order, "temp") == 0)
-  //   sort_array(array, 0, current_qty - 1, comparatorTemp); // sort by temperature
 
   if (verbose == 1) {
-    // print_array(array, current_qty);
+    if (strcmp(sort_order, "date") == 0)
+      print_array(db, 2);
+    else if (strcmp(sort_order, "temp") == 0)
+      print_array(db, 1);
+    else
+      print_array(db, 0);
     printf("\n\n");
   }
   print_stat_per_year(db);
-  // drop_array(array);
   close_database(db);
   return 0;
 }
