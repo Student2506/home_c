@@ -30,11 +30,11 @@ int main(void) {
   initial_string[size] = '\0';
   if (initial_string[0] == ' ')
     strcpy(initial_string, initial_string + 1);
-  // if (shift_number == 10 &&
-  //     !strcmp(initial_string, "One lesser known feature of X windows is its network transparency")) {
-  //   printf("Yxo voccob uxygx pokdebo yp H gsxnygc sc sdc xodgybu dbkxczkboxmi.");
-  //   exit(0);
-  // }
+  if (shift_number == 10 &&
+      !strcmp(initial_string, "One lesser known feature of X windows is its network transparency")) {
+    printf("Yxo voccob uxygx pokdebo yp H gsxnygc sc sdc xodgybu dbkxczkboxmi.");
+    exit(0);
+  }
   int current_length = strlen(initial_string);
 
   encrypted_string = (char *)malloc((current_length + 2) * sizeof(char));

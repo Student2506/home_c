@@ -33,10 +33,6 @@ int main(void) {
         break;
       }
     }
-    // if (index_more_heavy == 0 && input == 1) {
-    //   printf("%d", cnt++);
-    //   return 0;
-    // }
     if (WEIGHTS[index_more_heavy] - input < input - WEIGHTS[index_less_heavy]) {
       input = WEIGHTS[index_more_heavy] - input;
       WEIGHTS[index_more_heavy] = 0;
