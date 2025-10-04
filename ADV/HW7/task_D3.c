@@ -30,65 +30,8 @@ tree *findBrother(tree *root, int key) {
     return findBrother(root->right, key);
 }
 
-void preorder(tree *root) {
-  if (root == NULL)
-    return;
-  printf("%d ", root->key);
-  if (root->left)
-    preorder(root->left);
-  if (root->right)
-    preorder(root->right);
-}
-
-int heightTree(tree *p) {
-  if (p == NULL) {
-    return 0;
-  } else {
-    int lheight = heightTree(p->left);
-    int rheight = heightTree(p->right);
-    if (lheight > rheight)
-      return (lheight + 1);
-    else
-      return (rheight + 1);
-  }
-}
-
-void printCurrentLevel(tree *root, int level) {
-  if (root == NULL)
-    return;
-
-  if (level == 1)
-    // printf("%d ", root->key);
-    printf("");
-  else if (level > 1) {
-    printCurrentLevel(root->left, level - 1);
-    printCurrentLevel(root->right, level - 1);
-  }
-}
-
-void printBFS(tree *root) {
-  int h = heightTree(root);
-  int i;
-  for (i = 1; i <= h; i++) {
-    printCurrentLevel(root, i);
-  }
-}
-
 int main(void) {
   tree *head = calloc(1, sizeof(tree));
-  //   char *str = malloc(LENGTH * sizeof(char));
-  //   fgets(str, LENGTH, stdin);
-  //   int array[LENGTH], count = 0;
-  //   char *token = strtok(str, " ");
-  //   head->key = atoi(token);
-  //   while (token != NULL) {
-  //     array[count] = atoi(token);
-  //     if(head->left == NULL)
-
-  //     token = strtok(NULL, " ");
-  //     count++;
-  //   }
-  //   printf("%d", count);
   head->key = 10;
   head->left = calloc(1, sizeof(tree));
   head->left->parent = head;
