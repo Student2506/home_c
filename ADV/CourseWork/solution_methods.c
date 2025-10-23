@@ -1,7 +1,6 @@
 #include "solution_methods.h"
 
-
-float rootFindLineSearch2(float xl, float xr, float eps, function f, function f2) {
+float rootFindLineSearch2(float xl, float xr, float eps, function f, function f2, const int *verbose) {
   float x, minx = xl, nextstep;
   nextstep = fabs(xr - xl) / (1 / eps);
   int stepcount = 0;
@@ -10,11 +9,13 @@ float rootFindLineSearch2(float xl, float xr, float eps, function f, function f2
       minx = x;
   }
   return minx;
+  if (verbose != NULL && *verbose == 1)
+    printf("Find Line Search Method root for %d steps\n", stepcount);
 }
 
-float rootFindDiv2(float xl, float xr, float eps, function f, function f2) {
+float rootFindDiv2(float xl, float xr, float eps, function f, function f2, const int *verbose) {
   int stepcount = 0;
-  float xm;
+  float xm = (xl + xr) / 2;
   while (fabs(h(xm, f, f2)) > eps) {
     stepcount++;
     xm = (xl + xr) / 2;
@@ -26,23 +27,26 @@ float rootFindDiv2(float xl, float xr, float eps, function f, function f2) {
     else
       xl = xm;
   }
-  printf("Find Div Search root for %d steps\n", stepcount);
+  if (verbose != NULL && *verbose == 1)
+    printf("Find Division Method Search root for %d steps\n", stepcount);
   return xm;
 }
 
-float rootFindChord2(float xl, float xr, float eps, function f, function f2) {
+float rootFindChord2(float xl, float xr, float eps, function f, function f2, const int *verbose) {
 
   int stepcount = 0;
-  while (fabs(xr - xl) > 0) {
+  while (fabs(xr - xl) > eps) {
     xl = xr - (xr - xl) * h(xr, f, f2) / (h(xr, f, f2) - h(xl, f, f2));
     xr = xl - (xl - xr) * h(xl, f, f2) / (h(xl, f, f2) - h(xr, f, f2));
     stepcount++;
   }
-  printf("Find root for %d steps\n", stepcount);
+  if (verbose != NULL && *verbose == 1)
+    printf("Find Chord Method root for %d steps\n", stepcount);
   return xr;
 }
 
-float rootFindTangent2(float xn, float eps, function func, function dfunc, function func2, function dfunc2) {
+float rootFindTangent2(float xn, float eps, function func, function dfunc, function func2, function dfunc2,
+                       const int *verbose) {
   float x1 = xn - h(xn, func, func2) / h(xn, dfunc, dfunc2);
   float x0 = xn;
   int stepcount = 0;
@@ -51,12 +55,13 @@ float rootFindTangent2(float xn, float eps, function func, function dfunc, funct
     x1 = x1 - h(x1, func, func2) / h(x1, dfunc, dfunc2);
     stepcount++;
   }
-  printf("Find root for %d steps\n", stepcount);
+  if (verbose != NULL && *verbose == 1)
+    printf("Find Tangent method root for %d steps\n", stepcount);
   return x1;
 }
 
 float rootFindCombine2(float xl, float xr, float eps, function func, function dfunc, function ddfunc, function func2,
-                       function dfunc2, function ddfunc2) {
+                       function dfunc2, function ddfunc2, const int *verbose) {
   int stepcount = 0;
   while (fabs(xl - xr) > 2 * eps) {
     if (h(xl, func, func2) * h(xl, ddfunc, ddfunc2) < 0) {
@@ -79,20 +84,24 @@ float rootFindCombine2(float xl, float xr, float eps, function func, function df
     }
     stepcount++;
   }
-  printf("Find root for %d steps\n", stepcount);
+  if (verbose != NULL && *verbose == 1)
+    printf("Find Combine method root for %d steps\n", stepcount);
   return (xl + xr) / 2;
 }
 
-float calcIntegralMonteCarlo2(float xl, float xr, long long n, function f) {
+float calcIntegralMonteCarlo2(float xl, float xr, long long n, function f, const int *verbose) {
   srand(time(NULL));
-  long long i;
+  int stepcount = 0;
   double x;
   double sum_f = 0.0;
-  for (int i = 0; i < n; i++) {
+  for (long long i = 0; i < n; i++) {
     x = xl + (xr - xl) * ((double)rand() / RAND_MAX);
     sum_f += f(x);
+    stepcount++;
   }
   double average_f = sum_f / n;
   double estimated_integral = average_f * (xr - xl);
+  if (verbose != NULL && *verbose == 1)
+    printf("Find Monte Carlo method integral for %d steps\n", stepcount);
   return estimated_integral;
 }
