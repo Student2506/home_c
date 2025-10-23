@@ -1,5 +1,5 @@
 #include "solution_methods.h"
-#include <math.h>
+
 
 float rootFindLineSearch2(float xl, float xr, float eps, function f, function f2) {
   float x, minx = xl, nextstep;
@@ -81,4 +81,18 @@ float rootFindCombine2(float xl, float xr, float eps, function func, function df
   }
   printf("Find root for %d steps\n", stepcount);
   return (xl + xr) / 2;
+}
+
+float calcIntegralMonteCarlo2(float xl, float xr, long long n, function f) {
+  srand(time(NULL));
+  long long i;
+  double x;
+  double sum_f = 0.0;
+  for (int i = 0; i < n; i++) {
+    x = xl + (xr - xl) * ((double)rand() / RAND_MAX);
+    sum_f += f(x);
+  }
+  double average_f = sum_f / n;
+  double estimated_integral = average_f * (xr - xl);
+  return estimated_integral;
 }
