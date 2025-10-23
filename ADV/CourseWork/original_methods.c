@@ -211,7 +211,17 @@ float calcIntegralMonteCarlo(float xl, float xr, float fmax, size_t n, function 
    */
   int stepcount = 0;
   for (size_t i = 0; i < n; i++) {
+    /**
+     * @brief Next x coordinate in area.
+     *
+     * Next x coordinate in area.
+     */
     float x = ((float)rand() / (float)RAND_MAX * width - fabs(xl));
+    /**
+     * @brief Next y coordinate in area.
+     *
+     * Next y coordinate in area.
+     */
     float y = (float)rand() / (float)RAND_MAX * height;
     if (y < f(x))
       in_d++;
