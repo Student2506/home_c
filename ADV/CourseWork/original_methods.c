@@ -1,8 +1,29 @@
 #include "original_methods.h"
 
 float rootFindLineSearch(float xl, float xr, float eps, function f, const int *verbose) {
-  float x, minx = xl, nextstep;
-  nextstep = fabs(xr - xl) / (1 / eps);
+  /**
+   * @brief Stores current position of x in interval of xl-xr.
+   *
+   * Stores current position of x in interval of xl-xr.
+   */
+  float x;
+  /**
+   * @brief Stores current minimum of x.
+   *
+   * Stores current minimum of x.
+   */
+  float minx = xl;
+  /**
+   * @brief Stores current interval of x.
+   *
+   * Stores current interval of x.
+   */
+  float nextstep = fabs(xr - xl) / (1 / eps);
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
   for (x = xl; x < xr; x += nextstep, stepcount++) {
     if (fabs(f(x)) < fabs(f(minx)))
@@ -14,7 +35,17 @@ float rootFindLineSearch(float xl, float xr, float eps, function f, const int *v
 }
 
 float rootFindDiv(float xl, float xr, float eps, function f, const int *verbose) {
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
+  /**
+   * @brief Stores median between left and right / xl and xr.
+   *
+   * Stores median between left and right / xl and xr.
+   */
   float xm;
   while (fabs(xr - xl) > eps) {
     stepcount++;
@@ -30,6 +61,11 @@ float rootFindDiv(float xl, float xr, float eps, function f, const int *verbose)
 }
 
 float rootFindChord(float xl, float xr, float eps, function f, const int *verbose) {
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
   while (fabs(xr - xl) > eps) {
     xl = xr - (xr - xl) * f(xr) / (f(xr) - f(xl));
@@ -42,8 +78,23 @@ float rootFindChord(float xl, float xr, float eps, function f, const int *verbos
 }
 
 float rootFindTangent(float xn, float eps, function f, function df, const int *verbose) {
+  /**
+   * @brief Stores Tangent for some xn-value.
+   *
+   * Stores Tangent for some xn-value.
+   */
   float x1 = xn - f(xn) / df(xn);
+  /**
+   * @brief Stores xn-value.
+   *
+   * Stores xn-value.
+   */
   float x0 = xn;
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
   while (fabs(x0 - x1) > eps) {
     x0 = x1;
@@ -56,6 +107,11 @@ float rootFindTangent(float xn, float eps, function f, function df, const int *v
 }
 
 float rootFindCombine(float xl, float xr, float eps, function f, function df, function ddf, const int *verbose) {
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
   while (fabs(xl - xr) > 2 * eps) {
     if (f(xl) * ddf(xl) < 0)
@@ -74,8 +130,23 @@ float rootFindCombine(float xl, float xr, float eps, function f, function df, fu
 }
 
 float calcIntegralTrap(float xl, float xr, size_t n, function f, const int *verbose) {
+  /**
+   * @brief Stores sum of the rectangles.
+   *
+   * Stores sum of the rectangles.
+   */
   float sum = 0;
+  /**
+   * @brief Defines difference between left and right sides of rectangle.
+   *
+   * Defines difference between left and right sides of rectangle.
+   */
   float h = (xr - xl) / n;
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
   for (float x = xl + h; x < xr - h; x += h) {
     sum += 0.5 * h * (f(x) + f(x + h));
@@ -87,8 +158,23 @@ float calcIntegralTrap(float xl, float xr, size_t n, function f, const int *verb
 }
 
 float calcIntegralSimpson(float xl, float xr, size_t n, function f, const int *verbose) {
+  /**
+   * @brief Stores sum of the rectangles.
+   *
+   * Stores sum of the rectangles.
+   */
   float sum = 0;
+  /**
+   * @brief Defines difference between left and right sides of rectangle.
+   *
+   * Defines difference between left and right sides of rectangle.
+   */
   float h = (xr - xl) / n;
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
   for (float x = xl + h; x < xr - h; x += h) {
     sum += h / 6.0 * (f(x) + 4.0 * f(0.5 * (x + x + h)) + f(x + h));
@@ -100,8 +186,29 @@ float calcIntegralSimpson(float xl, float xr, size_t n, function f, const int *v
 }
 
 float calcIntegralMonteCarlo(float xl, float xr, float fmax, size_t n, function f, const int *verbose) {
+  /**
+   * @brief Calculates quantity points inside (below) function.
+   *
+   * Calculates quantity points inside (below) function.
+   */
   size_t in_d = 0;
-  float width = fabs(xr - xl), height = fmax;
+  /**
+   * @brief Stores width of rectangle.
+   *
+   * Stores width of rectangle.
+   */
+  float width = fabs(xr - xl);
+  /**
+   * @brief Stores height of rectangle.
+   *
+   * Stores height of rectangle.
+   */
+  float height = fmax;
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
   for (size_t i = 0; i < n; i++) {
     float x = ((float)rand() / (float)RAND_MAX * width - fabs(xl));
