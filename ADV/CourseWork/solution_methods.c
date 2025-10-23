@@ -1,8 +1,30 @@
 #include "solution_methods.h"
 
 float rootFindLineSearch2(float xl, float xr, float eps, function f, function f2, const int *verbose) {
-  float x, minx = xl, nextstep;
+  /**
+   * @brief Intermediate value of x on interval from xl to xr.
+   *
+   * Intermediate value of x on interval from xl to xr
+   */
+  float x;
+  /**
+   * @brief Minimum found for x value.
+   *
+   * Minimum found for x value.
+   */
+  float minx = xl;
+  /**
+   * @brief Step size to move from xl to xr.
+   *
+   * Step size to move from xl to xr
+   */
+  float nextstep;
   nextstep = fabs(xr - xl) / (1 / eps);
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
   for (x = xl; x < xr; x += nextstep, stepcount++) {
     if (fabs(f(x) - f2(x)) < fabs(f(minx) - f2(minx)))
@@ -14,7 +36,17 @@ float rootFindLineSearch2(float xl, float xr, float eps, function f, function f2
 }
 
 float rootFindDiv2(float xl, float xr, float eps, function f, function f2, const int *verbose) {
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
+  /**
+   * @brief Median value of x on interval from xl to xr.
+   *
+   * Median value of x on interval from xl to xr
+   */
   float xm = (xl + xr) / 2;
   while (fabs(h(xm, f, f2)) > eps) {
     stepcount++;
@@ -33,7 +65,11 @@ float rootFindDiv2(float xl, float xr, float eps, function f, function f2, const
 }
 
 float rootFindChord2(float xl, float xr, float eps, function f, function f2, const int *verbose) {
-
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
   while (fabs(xr - xl) > eps) {
     xl = xr - (xr - xl) * h(xr, f, f2) / (h(xr, f, f2) - h(xl, f, f2));
@@ -47,8 +83,23 @@ float rootFindChord2(float xl, float xr, float eps, function f, function f2, con
 
 float rootFindTangent2(float xn, float eps, function func, function dfunc, function func2, function dfunc2,
                        const int *verbose) {
+  /**
+   * @brief Coffecient to calculate tangent.
+   *
+   * Coffecient to calculate tangent.
+   */
   float x1 = xn - h(xn, func, func2) / h(xn, dfunc, dfunc2);
+  /**
+   * @brief Value to start from.
+   *
+   * Value to start from.
+   */
   float x0 = xn;
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
   while (fabs(x0 - x1) > eps) {
     x0 = x1;
@@ -62,6 +113,11 @@ float rootFindTangent2(float xn, float eps, function func, function dfunc, funct
 
 float rootFindCombine2(float xl, float xr, float eps, function func, function dfunc, function ddfunc, function func2,
                        function dfunc2, function ddfunc2, const int *verbose) {
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
   while (fabs(xl - xr) > 2 * eps) {
     if (h(xl, func, func2) * h(xl, ddfunc, ddfunc2) < 0) {
@@ -91,8 +147,23 @@ float rootFindCombine2(float xl, float xr, float eps, function func, function df
 
 float calcIntegralMonteCarlo2(float xl, float xr, long long n, function f, const int *verbose) {
   srand(time(NULL));
+  /**
+   * @brief Counts steps of calculation.
+   *
+   * Counts steps of calculation.
+   */
   int stepcount = 0;
+  /**
+   * @brief Intermediate value of x on interval from xl to xr.
+   *
+   * Intermediate value of x on interval from xl to xr
+   */
   double x;
+  /**
+   * @brief Stores sum of the rectangles.
+   *
+   * Stores sum of the rectangles.
+   */
   double sum_f = 0.0;
   for (long long i = 0; i < n; i++) {
     x = xl + (xr - xl) * ((double)rand() / RAND_MAX);
