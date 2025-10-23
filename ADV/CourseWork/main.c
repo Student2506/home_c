@@ -6,6 +6,10 @@
 #include "original_methods.h"
 #include "solution_methods.h"
 
+/**
+ * @struct point
+ * @brief Represents a point in a 2D coordinate system.
+ */
 typedef struct Point {
   float x;
   float y;
@@ -17,6 +21,7 @@ int compare(const void *first, const void *second) {
 
   return f->x > s->y ? 1 : -1;
 }
+
 
 int main(int argc, char *argv[]) {
   int IsDisplayPoints = 0, IsDisplayIterations = 0;
@@ -53,13 +58,9 @@ int main(int argc, char *argv[]) {
     for (unsigned long long i = 0; i < sizeof(points) / sizeof(Point); i++) {
       printf("%.10f %.10f\n", points[i].x, points[i].y);
     }
-  float f1_area = calcIntegralMonteCarlo2(points[0].x, points[2].x, 1 / 0.000001, f1, &IsDisplayIterations);
+  float f1_area = calcIntegralTrap(points[0].x, points[2].x, 1 / 0.000001, f1, &IsDisplayIterations);
   float f2_area = calcIntegralMonteCarlo2(points[1].x, points[2].x, 1 / 0.000001, f2, &IsDisplayIterations);
-  float f3_area = calcIntegralMonteCarlo2(points[0].x, points[1].x, 1 / 0.000001, f3, &IsDisplayIterations);
-  // printf("f1: %.10f\n", f1_area);
-  // printf("f2: %.10f\n", f2_area);
-  // printf("f3: %.10f\n", f3_area);
-
+  float f3_area = calcIntegralSimpson(points[0].x, points[1].x, 1 / 0.000001, f3, &IsDisplayIterations);
   printf("Total: %.10f\n", f1_area - f2_area - f3_area);
   return 0;
 }
