@@ -165,13 +165,26 @@ float calcIntegralMonteCarlo2(float xl, float xr, long long n, function f, const
    * Stores sum of the rectangles.
    */
   double sum_f = 0.0;
+  /**
+   * @brief Average of sum of the rectangles.
+   *
+   * Average of sum of the rectangles.
+   */
+  double average_f;
+  /**
+   * @brief Integral of area of the rectangles.
+   *
+   * Integral of area of the rectangles.
+   */
+  double estimated_integral;
+  
   for (long long i = 0; i < n; i++) {
     x = xl + (xr - xl) * ((double)rand() / RAND_MAX);
     sum_f += f(x);
     stepcount++;
   }
-  double average_f = sum_f / n;
-  double estimated_integral = average_f * (xr - xl);
+  average_f = sum_f / n;
+  estimated_integral = average_f * (xr - xl);
   if (verbose != NULL && *verbose == 1)
     printf("Find Monte Carlo method integral for %d steps\n", stepcount);
   return estimated_integral;
