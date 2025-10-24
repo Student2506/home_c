@@ -1,0 +1,120 @@
+# Language zh-cn translations for Sensor Reader package.
+# Copyright (C) 2025 THE Sensor Reader'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Sensor Reader package.
+# <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Sensor Reader 1.0\n"
+"Report-Msgid-Bugs-To: zpe25@ya.ru\n"
+"POT-Creation-Date: 2025-03-30 21:04+0300\n"
+"PO-Revision-Date: 2025-03-30 21:08+0300\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Language zh-cn\n"
+"Language: zh-cn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.c:28
+#, c-format
+msgid "-f Input csv file for processing (mandatory)\n"
+msgstr ""
+
+#: main.c:27
+#, c-format
+msgid "-h This help text\n"
+msgstr ""
+
+#: main.c:29
+#, c-format
+msgid "-m Month to show stats about\n"
+msgstr ""
+
+#: db.c:120
+#, c-format
+msgid "============ Current stats ==========\n"
+msgstr ""
+
+#: temp_api.c:98
+msgid "April"
+msgstr ""
+
+#: temp_api.c:99
+msgid "August"
+msgstr ""
+
+#: temp_api.c:99
+msgid "December"
+msgstr ""
+
+#: temp_api.c:98
+msgid "February"
+msgstr ""
+
+#: temp_api.c:86
+#, c-format
+msgid ""
+"For year:\n"
+"Average: %.2f\n"
+"Minimal: %d\n"
+"Maximal: %d\n"
+"\n"
+msgstr ""
+
+#: temp_api.c:98
+msgid "January"
+msgstr ""
+
+#: temp_api.c:99
+msgid "July"
+msgstr ""
+
+#: temp_api.c:98
+msgid "June"
+msgstr ""
+
+#: temp_api.c:98
+msgid "March"
+msgstr ""
+
+#: temp_api.c:98
+msgid "May"
+msgstr ""
+
+#: temp_api.c:99
+msgid "November"
+msgstr ""
+
+#: temp_api.c:99
+msgid "October"
+msgstr ""
+
+#: temp_api.c:99
+msgid "September"
+msgstr ""
+
+#: temp_api.c:68
+#, c-format
+msgid "Statistical data for the %dth year\n"
+msgstr ""
+
+#: temp_api.c:104
+#, c-format
+msgid ""
+"Temperature for %s:\n"
+"Average: %.2f degrees Celsius\n"
+"Minimal: %d degrees Celsius\n"
+"Maximal: %d degrees Celsius\n"
+"\n"
+msgstr ""
+
+#: main.c:26
+#, c-format
+msgid "Usage: %s [options]\n"
+msgstr ""
+
+#: db.c:121
+#, c-format
+msgid "Year Month Day Hour Minute Temperature\n"
+msgstr ""

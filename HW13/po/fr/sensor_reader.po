@@ -1,0 +1,208 @@
+# French translations for Sensor Reader package.
+# Copyright (C) 2025 THE Sensor Reader'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Sensor Reader package.
+# <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Sensor Reader 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-02 10:31+0300\n"
+"PO-Revision-Date: 2025-03-30 21:07+0300\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: main.c:30
+#, c-format
+msgid "-f Input csv file for processing (mandatory)\n"
+msgstr "-f Inclure csv fichier pour lecture (obligatoire)\n"
+
+#: main.c:29
+#, c-format
+msgid "-h This help text\n"
+msgstr "-h Ce texte d'aide\n"
+
+#: main.c:31
+#, c-format
+msgid "-m Month to show stats about\n"
+msgstr "-m Mois per laquelle il faut presenter stats\n"
+
+#: main.c:32
+#, c-format
+msgid "-s {date|temp} Sorts data accordinglly\n"
+msgstr "-s {date|temp} Trier des donnes par dates ou par temps.\n"
+
+#: main.c:33
+#, c-format
+msgid "-v Show file content, with optional sorting.\n"
+msgstr "-v Presenter des donnes, en utilizant un tri, s'il y un.\n"
+
+#: db.c:96
+#, c-format
+msgid "============ Current stats ==========\n"
+msgstr "============ Stats Acutelles ==========\n"
+
+#: temp_api.c:100
+msgid "April"
+msgstr "Avril"
+
+#: temp_api.c:101
+msgid "August"
+msgstr "Aout"
+
+#: temp_api.c:107
+#, c-format
+msgid "Average: %.2f degree Celsius\n"
+msgid_plural "Average: %.2f degrees Celsius\n"
+msgstr[0] "Moyenne: %.2f degré Celsius\n"
+msgstr[1] "Moyenne: %.2f degrés Celsius\n"
+
+#: parser.c:15
+#, c-format
+msgid "Can't open file %s. Check existance and permissions.\n"
+msgstr "Impossible d'ovrir ficher %s. Verifiez l'existance et permissions.\n"
+
+#: temp_api.c:101
+msgid "December"
+msgstr "Décembre"
+
+#: temp_api.c:100
+msgid "February"
+msgstr "Fevrier"
+
+#: main.c:60
+#, c-format
+msgid "File contains %d row\n"
+msgid_plural "File contains %d rows\n"
+msgstr[0] "Il y a %d ligne dans ce fichier\n"
+msgstr[1] "Il y a %d lignes dans ce fichier\n"
+
+#: main.c:53
+#, c-format
+msgid ""
+"Filename is mandatory\n"
+"Try -h for help\n"
+msgstr ""
+"Nom de la ficher est obligatoire\n"
+"Essayiez utiliser -h pour l'aide\n"
+
+#: temp_api.c:85
+#, c-format
+msgid ""
+"For year:\n"
+"Average: %.2f degree Celsius\n"
+msgid_plural ""
+"For year:\n"
+"Average: %.2f degrees Celsius\n"
+msgstr[0] ""
+"Pour toute l'annee:\n"
+"Moyenne: %.2f degré Celsius\n"
+msgstr[1] ""
+"Pour toute l'annee:\n"
+"Moyenne: %.2f degrés Celsius\n"
+
+#: parser.c:45 parser.c:52 parser.c:59 parser.c:66 parser.c:73 parser.c:80
+#, c-format
+msgid "Found error in row %d.\n"
+msgstr "Il y a une error. Ligne %d du fichier.\n"
+
+#: temp_api.c:100
+msgid "January"
+msgstr "Janvier"
+
+#: temp_api.c:101
+msgid "July"
+msgstr "Juillet"
+
+#: temp_api.c:100
+msgid "June"
+msgstr "Juin"
+
+#: temp_api.c:100
+msgid "March"
+msgstr "Mars"
+
+#: temp_api.c:89 temp_api.c:109
+#, c-format
+msgid ""
+"Maximal: %d degree Celsius\n"
+"\n"
+msgid_plural ""
+"Maximal: %d degrees Celsius\n"
+"\n"
+msgstr[0] ""
+"Maximale: %d degré Celsius\n"
+"\n"
+msgstr[1] ""
+"Maximale: %d degrés Celsius\n"
+"\n"
+
+#: temp_api.c:100
+msgid "May"
+msgstr "Mai"
+
+#: temp_api.c:88 temp_api.c:108
+#, c-format
+msgid "Minimal: %d degree Celsius\n"
+msgid_plural "Minimal: %d degrees Celsius\n"
+msgstr[0] "Minimale: %d degré Celsius\n"
+msgstr[1] "Minimale: %d degrés Celsius\n"
+
+#: temp_api.c:101
+msgid "November"
+msgstr "Novembre"
+
+#: temp_api.c:101
+msgid "October"
+msgstr "Octobre"
+
+#: main.c:56
+#, c-format
+msgid "Processing %s\n"
+msgstr "On cours de lire %s\n"
+
+#: temp_api.c:101
+msgid "September"
+msgstr "Septembre"
+
+#: temp_api.c:67
+#, c-format
+msgid "Statistical data for the %dth year\n"
+msgstr "Les donnes statistiques pour l'annee %d\n"
+
+#: temp_api.c:106
+#, c-format
+msgid "Temperature for %s:\n"
+msgstr "Température pour %s:\n"
+
+#: temp_api.c:103
+#, c-format
+msgid "Temperature for the %s is absent.\n"
+msgstr "Température pour %s est absente\n"
+
+#: main.c:48
+#, c-format
+msgid "Unknown argument: %s Try -h for help\n"
+msgstr "Un argument inconnu: %s Essayez -h pour vous aider\n"
+
+#: main.c:28
+#, c-format
+msgid "Usage: %s [options]\n"
+msgstr "Mode d'utilisation %s [options]\n"
+
+#: main.c:64
+#, c-format
+msgid "We have read %d line in total\n"
+msgid_plural "We have read %d lines in total\n"
+msgstr[0] "Nous avons lu %d ligne au totale.\n"
+msgstr[1] "Nous avons lu %d lignes au totale.\n"
+
+#: db.c:97
+#, c-format
+msgid "Year  Month  Day  Hour  Minute  Temperature\n"
+msgstr "Annee Mois   Jour Heure Minute  Température\n"

@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-31 12:04+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: main.c:28
+#, c-format
+msgid "-f Input csv file for processing (mandatory)\n"
+msgstr ""
+
+#: main.c:27
+#, c-format
+msgid "-h This help text\n"
+msgstr ""
+
+#: main.c:29
+#, c-format
+msgid "-m Month to show stats about\n"
+msgstr ""
+
+#: db.c:122
+#, c-format
+msgid "============ Current stats ==========\n"
+msgstr ""
+
+#: temp_api.c:99
+msgid "April"
+msgstr ""
+
+#: temp_api.c:100
+msgid "August"
+msgstr ""
+
+#: temp_api.c:106
+#, c-format
+msgid "Average: %.2f degree Celsius\n"
+msgid_plural "Average: %.2f degrees Celsius\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: temp_api.c:100
+msgid "December"
+msgstr ""
+
+#: temp_api.c:99
+msgid "February"
+msgstr ""
+
+#: temp_api.c:87
+#, c-format
+msgid ""
+"For year:\n"
+"Average: %.2f\n"
+"Minimal: %d\n"
+"Maximal: %d\n"
+"\n"
+msgstr ""
+
+#: temp_api.c:99
+msgid "January"
+msgstr ""
+
+#: temp_api.c:100
+msgid "July"
+msgstr ""
+
+#: temp_api.c:99
+msgid "June"
+msgstr ""
+
+#: temp_api.c:99
+msgid "March"
+msgstr ""
+
+#: temp_api.c:108
+#, c-format
+msgid ""
+"Maximal: %d degree Celsius\n"
+"\n"
+msgid_plural ""
+"Maximal: %d degrees Celsius\n"
+"\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: temp_api.c:99
+msgid "May"
+msgstr ""
+
+#: temp_api.c:107
+#, c-format
+msgid "Minimal: %d degree Celsius\n"
+msgid_plural "Minimal: %d degrees Celsius\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: temp_api.c:100
+msgid "November"
+msgstr ""
+
+#: temp_api.c:100
+msgid "October"
+msgstr ""
+
+#: temp_api.c:100
+msgid "September"
+msgstr ""
+
+#: temp_api.c:69
+#, c-format
+msgid "Statistical data for the %dth year\n"
+msgstr ""
+
+#: temp_api.c:105
+#, c-format
+msgid "Temperature for %s:\n"
+msgstr ""
+
+#: temp_api.c:102
+#, c-format
+msgid "Temperature for the %s is absent.\n"
+msgstr ""
+
+#: main.c:26
+#, c-format
+msgid "Usage: %s [options]\n"
+msgstr ""
+
+#: db.c:123
+#, c-format
+msgid "Year  Month  Day  Hour  Minute  Temperature\n"
+msgstr ""

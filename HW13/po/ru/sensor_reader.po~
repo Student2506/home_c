@@ -1,0 +1,215 @@
+# Russian translations for Sensor Reader package.
+# Copyright (C) 2025 THE Sensor Reader'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Sensor Reader package.
+# <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Sensor Reader 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-02 09:51+0300\n"
+"PO-Revision-Date: 2025-03-30 21:06+0300\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: main.c:30
+#, c-format
+msgid "-f Input csv file for processing (mandatory)\n"
+msgstr "-f Укажите csv файл для обработки (обязательный параметр)\n"
+
+#: main.c:29
+#, c-format
+msgid "-h This help text\n"
+msgstr "-h Этот экран помощи\n"
+
+#: main.c:31
+#, c-format
+msgid "-m Month to show stats about\n"
+msgstr "-m Месяц для которого нужно показать статистику\n"
+
+#: main.c:32
+#, c-format
+msgid "-s {date|temp} Sorts data accordinglly\n"
+msgstr "-s (date|temp) Отсортировать данные по дате или температуре.\n"
+
+#: main.c:33
+#, c-format
+msgid "-v Show file content, with optional sorting.\n"
+msgstr "-v Показать содержимое файла, пременив сортировку, при наличии.\n"
+
+#: db.c:96
+#, c-format
+msgid "============ Current stats ==========\n"
+msgstr "========== Текущая статистика ========\n"
+
+#: temp_api.c:100
+msgid "April"
+msgstr "Апрель"
+
+#: temp_api.c:101
+msgid "August"
+msgstr "Август"
+
+#: temp_api.c:107
+#, c-format
+msgid "Average: %.2f degree Celsius\n"
+msgid_plural "Average: %.2f degrees Celsius\n"
+msgstr[0] "Средняя: %.2f градус Цельсия\n"
+msgstr[1] "Средняя: %.2f градусa Цельсия\n"
+msgstr[2] "Средняя: %.2f градусов Цельсия\n"
+
+#: parser.c:15
+#, c-format
+msgid "Can't open file %s. Check existance and permissions.\n"
+msgstr "Не возможно открыть файл %s. Проверьте наличие файла и разрешения.\n"
+
+#: temp_api.c:101
+msgid "December"
+msgstr "Декабрь"
+
+#: temp_api.c:100
+msgid "February"
+msgstr "Февраль"
+
+#: main.c:60
+#, c-format
+msgid "File contains %d row\n"
+msgid_plural "File contains %d rows\n"
+msgstr[0] "Исходный файл содержит %d строку.\n"
+msgstr[1] "Исходный файл содержит %d строки.\n"
+msgstr[2] "Исходный файл содержит %d строк.\n"
+
+#: main.c:53
+#, c-format
+msgid "Filename is mandatory\n"
+msgstr "Имя файла для обработки обязательный параметр\n"
+
+#: temp_api.c:85
+#, c-format
+msgid ""
+"For year:\n"
+"Average: %.2f degree Celsius\n"
+msgid_plural ""
+"For year:\n"
+"Average: %.2f degrees Celsius\n"
+msgstr[0] ""
+"Годовая статистика:\n"
+"Средняя температура: %.2f градус Цельсия\n"
+msgstr[1] ""
+"Годовая статистика:\n"
+"Средняя температура: %.2f градусa Цельсия\n"
+msgstr[2] ""
+"Годовая статистика:\n"
+"Средняя температура: %.2f градусов Цельсия\n"
+
+#: parser.c:45 parser.c:52 parser.c:59 parser.c:66 parser.c:73 parser.c:80
+#, c-format
+msgid "Found error in row %d.\n"
+msgstr "Ошибка в строке %d исходного файла.\n"
+
+#: temp_api.c:100
+msgid "January"
+msgstr "Январь"
+
+#: temp_api.c:101
+msgid "July"
+msgstr "Июль"
+
+#: temp_api.c:100
+msgid "June"
+msgstr "Июнь"
+
+#: temp_api.c:100
+msgid "March"
+msgstr "Март"
+
+#: temp_api.c:89 temp_api.c:109
+#, c-format
+msgid ""
+"Maximal: %d degree Celsius\n"
+"\n"
+msgid_plural ""
+"Maximal: %d degrees Celsius\n"
+"\n"
+msgstr[0] ""
+"Максимальная: %d градус Цельсия\n"
+"\n"
+msgstr[1] ""
+"Максимальная: %d градуса Цельсия\n"
+"\n"
+msgstr[2] ""
+"Максимальная: %d градусов Цельсия\n"
+"\n"
+
+#: temp_api.c:100
+msgid "May"
+msgstr "Май"
+
+#: temp_api.c:88 temp_api.c:108
+#, c-format
+msgid "Minimal: %d degree Celsius\n"
+msgid_plural "Minimal: %d degrees Celsius\n"
+msgstr[0] "Минимальная температура: %d градус Цельсия\n"
+msgstr[1] "Минимальная температура: %d градуса Цельсия\n"
+msgstr[2] "Минимальная температура: %d градусов Цельсия\n"
+
+#: temp_api.c:101
+msgid "November"
+msgstr "Ноябрь"
+
+#: temp_api.c:101
+msgid "October"
+msgstr "Октябрь"
+
+#: main.c:56
+#, c-format
+msgid "Processing %s\n"
+msgstr "Обрабатываем файл: %s\n"
+
+#: temp_api.c:101
+msgid "September"
+msgstr "Сентябрь"
+
+#: temp_api.c:67
+#, c-format
+msgid "Statistical data for the %dth year\n"
+msgstr "Статистика за %d год\n"
+
+#: temp_api.c:106
+#, c-format
+msgid "Temperature for %s:\n"
+msgstr "Температура за %s:\n"
+
+#: temp_api.c:103
+#, c-format
+msgid "Temperature for the %s is absent.\n"
+msgstr "Температура за %s отсутствует\n"
+
+#: main.c:48
+#, c-format
+msgid "Unknown argument: %s Try -h for help\n"
+msgstr "Неизвестный аргумент: %s Справка доступна по ключу -h\n"
+
+#: main.c:28
+#, c-format
+msgid "Usage: %s [options]\n"
+msgstr "Использование %s [опции]\n"
+
+#: main.c:64
+#, c-format
+msgid "We have read %d line in total\n"
+msgid_plural "We have read %d lines in total\n"
+msgstr[0] "Прочтена %d строка (в общем)\n"
+msgstr[1] "Прочтено %d строки (в общем)\n"
+msgstr[2] "Прочтено %d строк (в общем)\n"
+
+#: db.c:97
+#, c-format
+msgid "Year  Month  Day  Hour  Minute  Temperature\n"
+msgstr "Год   Месяц  День Час   Минута  Температура\n"
